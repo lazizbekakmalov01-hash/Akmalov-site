@@ -29,12 +29,13 @@
             position: relative;
         }
 
-        /* Flashlight - Fonarik effekti */
+        /* Flashlight - Fonarik effekti (YORQINROQ QILINDI) */
         #flashlight-effect {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none;
-            background: radial-gradient(circle 250px at 50% 50%, rgba(255,255,255,0.1), transparent 80%);
+            /* Yorqinlik oshirildi: rgba 0.1 dan 0.25 ga, hajm 250px dan 300px ga o'zgartirildi */
+            background: radial-gradient(circle 300px at 50% 50%, rgba(255,255,255,0.25), transparent 80%);
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 9999;
@@ -114,11 +115,50 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: fadeInUp 0.8s ease-out 0.2s forwards; opacity: 0;
         }
+
+        /* ================= YANGI QO'SHILGAN: MENYU VA FAYLLAR ================= */
+        .nav-tabs {
+            display: flex; background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px; padding: 4px; margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            animation: fadeInUp 0.8s ease-out 0.3s forwards; opacity: 0;
+        }
+        .tab-btn {
+            flex: 1; background: transparent; border: none; color: #94a3b8;
+            padding: 10px; font-size: 14px; font-weight: 500; cursor: pointer;
+            border-radius: 9px; transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            background: rgba(var(--color-1), 0.2);
+            color: #fff;
+            border: 1px solid rgba(var(--color-1), 0.4);
+        }
+        .view-section { display: none; }
+        .view-section.active-view { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        .files-list { display: flex; flex-direction: column; gap: 12px; }
+        .file-item {
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px 15px; border-radius: 12px; text-decoration: none; color: #fff;
+            transition: all 0.3s ease;
+        }
+        .file-item:hover {
+            background: rgba(var(--color-1), 0.15); border-color: rgba(var(--color-1), 0.4);
+            transform: translateY(-2px);
+        }
+        .file-info { display: flex; align-items: center; gap: 10px; text-align: left; }
+        .file-info i { font-size: 22px; color: #ef4444; }
+        .file-name { font-size: 14px; font-weight: 500; }
+        .download-icon { color: #94a3b8; transition: color 0.3s ease; }
+        .file-item:hover .download-icon { color: #fff; }
+        /* ====================================================================== */
         
         /* Nazorat tugmalari (Flashlight va Color) */
         .controls {
             display: flex; justify-content: center; gap: 15px; margin-bottom: 25px;
-            animation: fadeInUp 0.8s ease-out 0.3s forwards; opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards; opacity: 0;
         }
         .control-btn {
             background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
@@ -153,11 +193,11 @@
         .social-btn.linkedin:hover { background: #0077b5; border-color: #0077b5; }
         
         /* Tugmalarning ketma-ket chiqishi */
-        .social-grid a:nth-child(1) { animation: fadeInUp 0.6s ease-out 0.4s forwards; opacity: 0; }
-        .social-grid a:nth-child(2) { animation: fadeInUp 0.6s ease-out 0.5s forwards; opacity: 0; }
-        .social-grid a:nth-child(3) { animation: fadeInUp 0.6s ease-out 0.6s forwards; opacity: 0; }
-        .social-grid a:nth-child(4) { animation: fadeInUp 0.6s ease-out 0.7s forwards; opacity: 0; }
-        .social-btn.linkedin { animation: fadeInUp 0.6s ease-out 0.8s forwards; opacity: 0; }
+        .social-grid a:nth-child(1) { animation: fadeInUp 0.6s ease-out 0.5s forwards; opacity: 0; }
+        .social-grid a:nth-child(2) { animation: fadeInUp 0.6s ease-out 0.6s forwards; opacity: 0; }
+        .social-grid a:nth-child(3) { animation: fadeInUp 0.6s ease-out 0.7s forwards; opacity: 0; }
+        .social-grid a:nth-child(4) { animation: fadeInUp 0.6s ease-out 0.8s forwards; opacity: 0; }
+        .social-btn.linkedin { animation: fadeInUp 0.6s ease-out 0.9s forwards; opacity: 0; }
     </style>
 </head>
 <body>
@@ -180,43 +220,96 @@
             </div>
             
             <h1>Lazizbek Akmalov</h1>
-            
-            <!-- Flashlight va Rang o'zgartirish tugmalari -->
-            <div class="controls">
-                <button class="control-btn" id="toggle-flash">
-                    <i class="fas fa-lightbulb"></i> Flashlight
-                </button>
-                <button class="control-btn" id="toggle-color">
-                    <i class="fas fa-palette"></i> Color
-                </button>
+
+            <!-- ================= YANGI MENYU QISMI ================= -->
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="switchTab('profile')">Asosiy</button>
+                <button class="tab-btn" onclick="switchTab('files')">Fayllarim</button>
             </div>
-            
-            <!-- 2x2 grid shaklidagi tarmoqlar -->
-            <div class="social-grid">
-                <a href="https://t.me/akmalov_lazizbek" target="_blank" class="social-btn telegram">
-                    <i class="fab fa-telegram-plane"></i> Telegram
-                </a>
-                <a href="https://instagram.com/lazizbek_akmalov" target="_blank" class="social-btn instagram">
-                    <i class="fab fa-instagram"></i> Instagram
-                </a>
-                <a href="https://x.com/akmalov86358" target="_blank" class="social-btn twitter">
-                    <i class="fab fa-x-twitter"></i> X (Twitter)
-                </a>
-                <a href="mailto:lazizbekakmalov01@gmail.com" class="social-btn email">
-                    <i class="fas fa-envelope"></i> Email
+            <!-- ======================================================= -->
+
+            <!-- 1. ASOSIY PROFIL BO'LIMI -->
+            <div id="profile-view" class="view-section active-view">
+                <!-- Flashlight va Rang o'zgartirish tugmalari -->
+                <div class="controls">
+                    <button class="control-btn" id="toggle-flash">
+                        <i class="fas fa-lightbulb"></i> Flashlight
+                    </button>
+                    <button class="control-btn" id="toggle-color">
+                        <i class="fas fa-palette"></i> Color
+                    </button>
+                </div>
+                
+                <!-- 2x2 grid shaklidagi tarmoqlar -->
+                <div class="social-grid">
+                    <a href="https://t.me/akmalov_lazizbek" target="_blank" class="social-btn telegram">
+                        <i class="fab fa-telegram-plane"></i> Telegram
+                    </a>
+                    <a href="https://instagram.com/lazizbek_akmalov" target="_blank" class="social-btn instagram">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    <a href="https://x.com/akmalov86358" target="_blank" class="social-btn twitter">
+                        <i class="fab fa-x-twitter"></i> X (Twitter)
+                    </a>
+                    <a href="mailto:lazizbekakmalov01@gmail.com" class="social-btn email">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+                
+                <!-- Pastki (Full-width) LinkedIn tugmasi -->
+                <a href="https://www.linkedin.com/in/lazizbek-akmalov?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="social-btn linkedin full-width">
+                    <i class="fab fa-linkedin"></i> LinkedIn
                 </a>
             </div>
-            
-            <!-- Pastki (Full-width) LinkedIn tugmasi -->
-            <a href="https://www.linkedin.com/in/lazizbek-akmalov?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="social-btn linkedin full-width">
-                <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
+
+            <!-- 2. FAYLLAR BO'LIMI -->
+            <div id="files-view" class="view-section">
+                <div class="files-list">
+                    <!-- 1-Fayl -->
+                    <a href="Boston Globe_3009.pdf" target="_blank" download class="file-item">
+                        <div class="file-info">
+                            <i class="fas fa-file-pdf"></i>
+                            <span class="file-name">Boston Globe_3009.pdf</span>
+                        </div>
+                        <i class="fas fa-download download-icon"></i>
+                    </a>
+
+                    <!-- 2-Fayl -->
+                    <a href="The Globe and Mail - Se....pdf" target="_blank" download class="file-item">
+                        <div class="file-info">
+                            <i class="fas fa-file-pdf"></i>
+                            <span class="file-name">The Globe and Mail.pdf</span>
+                        </div>
+                        <i class="fas fa-download download-icon"></i>
+                    </a>
+                </div>
+            </div>
             
         </div>
     </div>
 
     <!-- JavaScript - Interaktiv funksiyalar uchun -->
     <script>
+        // ================= MENYU O'ZGARISHI UCHUN JS =================
+        function switchTab(tabName) {
+            const profileView = document.getElementById('profile-view');
+            const filesView = document.getElementById('files-view');
+            const buttons = document.querySelectorAll('.tab-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            if (tabName === 'profile') {
+                profileView.classList.add('active-view');
+                filesView.classList.remove('active-view');
+                buttons[0].classList.add('active');
+            } else {
+                filesView.classList.add('active-view');
+                profileView.classList.remove('active-view');
+                buttons[1].classList.add('active');
+            }
+        }
+        // =============================================================
+
         // 1. Flashlight (Fonarik) Mantiqi
         const flashlight = document.getElementById('flashlight-effect');
         const toggleFlash = document.getElementById('toggle-flash');
@@ -226,7 +319,8 @@
             if(!isFlashOn) return;
             const x = e.clientX || (e.touches && e.touches[0].clientX);
             const y = e.clientY || (e.touches && e.touches[0].clientY);
-            flashlight.style.background = `radial-gradient(circle 250px at ${x}px ${y}px, rgba(255,255,255,0.12), transparent 80%)`;
+            // JS orqali ham Yorqinlik oshirildi: rgba 0.25 va hajm 300px
+            flashlight.style.background = `radial-gradient(circle 300px at ${x}px ${y}px, rgba(255,255,255,0.25), transparent 80%)`;
         }
 
         document.addEventListener('mousemove', updateFlashlight);
