@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akmalov | Shaxsiy Sayt</title>
+    <style>
+        :root {
+            --bg-color: #f4f4f9;
+            --text-color: #333;
+            --card-bg: #fff;
+            --primary-color: #007bff;
+            --hover-color: #0056b3;
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --primary-color: #bb86fc;
+            --hover-color: #9965f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            transition: var(--transition);
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-color);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #777;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        [data-theme="dark"] p {
+             color: #aaa;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            border: 2px solid var(--primary-color);
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .link-btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .contact-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        
+        [data-theme="dark"] .contact-section {
+            border-top: 1px solid #444;
+        }
+
+        .contact-btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .contact-btn:hover {
+            background-color: var(--hover-color);
+        }
+    </style>
+</head>
+<body>
+
+    <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">🌙</button>
+
+    <div class="container">
+        <!-- Rasm uchun joy (keyin o'z rasmingizni qo'yasiz) -->
+        <img src="https://ui-avatars.com/api/?name=Akmalov&background=007bff&color=fff&size=120" alt="Profile Picture" class="profile-img">
+        
+        <h1>Akmalov</h1>
+        <p>Xush kelibsiz! Men texnologiyalar va dasturlashga qiziqaman. Mening barcha tarmoqlarim quyida joylashgan.</p>
+
+        <div class="links-container">
+            <a href="https://t.me/username" target="_blank" class="link-btn">Telegram</a>
+            <a href="https://instagram.com/username" target="_blank" class="link-btn">Instagram</a>
+            <a href="https://github.com/username" target="_blank" class="link-btn">GitHub</a>
+        </div>
+
+        <div class="contact-section">
+            <button class="contact-btn" onclick="window.location.href='mailto:email@example.com'">Men bilan bog'lanish</button>
+        </div>
+    </div>
+
+    <script>
+        // Tun/Kun rejimini boshqarish
+        const toggleTheme = () => {
+            const body = document.body;
+            const themeBtn = document.getElementById('theme-btn');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeBtn.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeBtn.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        };
+
+        // Sayt yuklanganda saqlangan rejimni tekshirish
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-btn').textContent = '☀️';
+            }
+        };
+    </script>
+</body>
+</html>
