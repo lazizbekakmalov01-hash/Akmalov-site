@@ -9,15 +9,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Asosiy sozlamalar */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+        /* CSS O'zgaruvchilar - Ranglarni avtomatik o'zgartirish uchun */
+        :root {
+            --color-1: 56, 189, 248; /* Asosiy rang */
+            --color-2: 129, 140, 248; /* Gradient rangi */
         }
+
+        /* Asosiy sozlamalar */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
         body {
-            background: #070b19; /* Tungi chuqur rang */
+            background: #070b19;
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -26,156 +28,150 @@
             overflow: hidden;
             position: relative;
         }
+
+        /* Flashlight - Fonarik effekti */
+        #flashlight-effect {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            background: radial-gradient(circle 250px at 50% 50%, rgba(255,255,255,0.1), transparent 80%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 9999;
+            will-change: opacity, background;
+        }
         
-        /* Yangi kuchli animatsiyali orqa fon chiroqlari */
+        /* Orqa fon chiroqlari */
         .glow-1, .glow-2 {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(90px);
-            z-index: -1;
-            animation: floatOrb 8s infinite alternate ease-in-out;
+            position: absolute; border-radius: 50%; filter: blur(90px);
+            z-index: -1; animation: floatOrb 8s infinite alternate ease-in-out;
+            will-change: transform;
         }
         .glow-1 {
             width: 400px; height: 400px;
-            background: rgba(56, 189, 248, 0.35);
-            top: 5%; left: 10%;
+            background: rgba(var(--color-1), 0.35); top: 5%; left: 10%;
+            transition: background 0.5s ease;
         }
         .glow-2 {
             width: 350px; height: 350px;
-            background: rgba(129, 140, 248, 0.25);
-            bottom: 5%; right: 10%;
-            animation-delay: -4s;
+            background: rgba(var(--color-2), 0.25); bottom: 5%; right: 10%;
+            animation-delay: -4s; transition: background 0.5s ease;
         }
         
         @keyframes floatOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(60px, 60px) scale(1.3); }
+            0% { transform: translate(0, 0) scale(1) translateZ(0); }
+            100% { transform: translate(60px, 60px) scale(1.2) translateZ(0); }
         }
 
-        /* Suzib turuvchi karta wrapper'i */
-        .card-wrapper {
-            animation: floatCard 6s ease-in-out infinite;
-        }
-        
+        /* Suzib turuvchi o'ram */
+        .card-wrapper { animation: floatCard 6s ease-in-out infinite; will-change: transform; }
         @keyframes floatCard {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            0%, 100% { transform: translateY(0) translateZ(0); }
+            50% { transform: translateY(-12px) translateZ(0); }
         }
 
-        /* Karta dizayni va kirib kelish animatsiyasi */
+        /* Asosiy Karta */
         .card {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 45px 40px;
-            text-align: center;
-            max-width: 380px;
-            width: 90vw;
+            border-radius: 24px; padding: 40px 30px;
+            text-align: center; max-width: 400px; width: 92vw;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            animation: fadeInUp 1s ease-out forwards;
-            opacity: 0;
-            transform: translateY(40px);
+            animation: fadeInUp 0.8s ease-out forwards; opacity: 0;
+            transform: translateY(40px); will-change: transform, opacity;
         }
 
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
-        /* Profil rasmi va aylanuvchi neon halqa */
+        /* Profil rasmi va neon hoshiya */
         .profile-pic-container {
-            position: relative;
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 25px auto;
-            animation: fadeInUp 1s ease-out 0.2s forwards;
-            opacity: 0;
+            position: relative; width: 120px; height: 120px;
+            margin: 0 auto 20px auto; animation: fadeInUp 0.8s ease-out 0.1s forwards; opacity: 0;
         }
         .profile-pic-border {
-            position: absolute;
-            top: -4px; left: -4px; right: -4px; bottom: -4px;
-            background: linear-gradient(45deg, #38bdf8, #818cf8, #38bdf8, #818cf8);
-            background-size: 300% 300%;
-            border-radius: 50%;
-            z-index: 0;
-            animation: rotateGradient 4s linear infinite;
+            position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px;
+            background: linear-gradient(45deg, rgb(var(--color-1)), rgb(var(--color-2)), rgb(var(--color-1)), rgb(var(--color-2)));
+            background-size: 300% 300%; border-radius: 50%;
+            z-index: 0; animation: rotateGradient 4s linear infinite;
+            transition: background 0.5s ease;
         }
         .profile-pic {
-            position: relative;
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            background: #0f172a;
-            z-index: 1;
-            padding: 5px;
+            position: relative; width: 100%; height: 100%;
+            border-radius: 50%; background: #0f172a; z-index: 1; padding: 5px;
         }
-        .profile-pic img {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+        .profile-pic img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
         @keyframes rotateGradient {
             0% { background-position: 0% 50%; transform: rotate(0deg); }
             100% { background-position: 100% 50%; transform: rotate(360deg); }
         }
 
-        /* Matnlar dizayni va animatsiyasi */
+        /* Ism */
         h1 {
-            font-size: 26px; font-weight: 600; margin-bottom: 5px; letter-spacing: 1px;
+            font-size: 26px; font-weight: 600; margin-bottom: 20px; letter-spacing: 1px;
             background: linear-gradient(to right, #ffffff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 1s ease-out 0.4s forwards;
-            opacity: 0;
-        }
-        p { 
-            font-size: 14px; color: #94a3b8; margin-bottom: 35px;
-            animation: fadeInUp 1s ease-out 0.6s forwards;
-            opacity: 0;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards; opacity: 0;
         }
         
-        /* Tugmalar dizayni va sakrash (bouncy) hover effekti */
-        .social-links { display: flex; flex-direction: column; gap: 16px; }
+        /* Nazorat tugmalari (Flashlight va Color) */
+        .controls {
+            display: flex; justify-content: center; gap: 15px; margin-bottom: 25px;
+            animation: fadeInUp 0.8s ease-out 0.3s forwards; opacity: 0;
+        }
+        .control-btn {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff; padding: 10px 18px; border-radius: 20px; font-size: 13px;
+            cursor: pointer; display: flex; align-items: center; gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .control-btn:hover { background: rgba(var(--color-1), 0.2); transform: scale(1.05); }
+        .control-btn.active { color: rgb(var(--color-1)); border-color: rgba(var(--color-1), 0.5); }
+
+        /* Tarmoqlar tarmog'i (2x2 Grid) */
+        .social-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;
+        }
+        
         .social-btn {
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            width: 100%; padding: 15px; border-radius: 14px;
-            text-decoration: none; color: #fff; font-size: 15px; font-weight: 500;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            position: relative; overflow: hidden;
-            z-index: 1;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 14px 10px; border-radius: 14px; text-decoration: none; color: #fff;
+            font-size: 14px; font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
+            will-change: transform;
         }
+        .social-btn.full-width { grid-column: span 2; margin-top: 5px; } /* LinkedIn uchun pastki qator */
         
-        .social-btn:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
-        }
+        /* Hover effektlari */
+        .social-btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
         .social-btn.telegram:hover { background: #0088cc; border-color: #0088cc; }
-        .social-btn.instagram:hover {
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            border-color: transparent;
-        }
+        .social-btn.instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-color: transparent; }
         .social-btn.twitter:hover { background: #000000; border-color: #333333; color: #ffffff; }
         .social-btn.email:hover { background: #ea4335; border-color: #ea4335; }
+        .social-btn.linkedin:hover { background: #0077b5; border-color: #0077b5; }
         
-        /* Tugmalarning ketma-ket kirib kelishi */
-        .social-btn:nth-child(1) { animation: fadeInUp 0.8s ease-out 0.8s forwards; opacity: 0; }
-        .social-btn:nth-child(2) { animation: fadeInUp 0.8s ease-out 1.0s forwards; opacity: 0; }
-        .social-btn:nth-child(3) { animation: fadeInUp 0.8s ease-out 1.2s forwards; opacity: 0; }
-        .social-btn:nth-child(4) { animation: fadeInUp 0.8s ease-out 1.4s forwards; opacity: 0; }
+        /* Tugmalarning ketma-ket chiqishi */
+        .social-grid a:nth-child(1) { animation: fadeInUp 0.6s ease-out 0.4s forwards; opacity: 0; }
+        .social-grid a:nth-child(2) { animation: fadeInUp 0.6s ease-out 0.5s forwards; opacity: 0; }
+        .social-grid a:nth-child(3) { animation: fadeInUp 0.6s ease-out 0.6s forwards; opacity: 0; }
+        .social-grid a:nth-child(4) { animation: fadeInUp 0.6s ease-out 0.7s forwards; opacity: 0; }
+        .social-btn.linkedin { animation: fadeInUp 0.6s ease-out 0.8s forwards; opacity: 0; }
     </style>
 </head>
 <body>
+
+    <!-- Fonarik effekti -->
+    <div id="flashlight-effect"></div>
+
     <!-- Harakatlanuvchi orqa fon nurlari -->
     <div class="glow-1"></div>
     <div class="glow-2"></div>
     
-    <!-- Havoda suzib turuvchi o'ram -->
     <div class="card-wrapper">
         <div class="card">
-            <!-- Aylanuvchi neon hoshiyali rasm -->
+            
             <div class="profile-pic-container">
                 <div class="profile-pic-border"></div>
                 <div class="profile-pic">
@@ -184,26 +180,86 @@
             </div>
             
             <h1>Lazizbek Akmalov</h1>
-            <p>Xalqaro munosabatlar va IT sohasi qiziquvchisi</p>
             
-            <div class="social-links">
+            <!-- Flashlight va Rang o'zgartirish tugmalari -->
+            <div class="controls">
+                <button class="control-btn" id="toggle-flash">
+                    <i class="fas fa-lightbulb"></i> Flashlight
+                </button>
+                <button class="control-btn" id="toggle-color">
+                    <i class="fas fa-palette"></i> Color
+                </button>
+            </div>
+            
+            <!-- 2x2 grid shaklidagi tarmoqlar -->
+            <div class="social-grid">
                 <a href="https://t.me/akmalov_lazizbek" target="_blank" class="social-btn telegram">
                     <i class="fab fa-telegram-plane"></i> Telegram
                 </a>
-                
                 <a href="https://instagram.com/lazizbek_akmalov" target="_blank" class="social-btn instagram">
                     <i class="fab fa-instagram"></i> Instagram
                 </a>
-
                 <a href="https://x.com/akmalov86358" target="_blank" class="social-btn twitter">
                     <i class="fab fa-x-twitter"></i> X (Twitter)
                 </a>
-                
                 <a href="mailto:lazizbekakmalov01@gmail.com" class="social-btn email">
                     <i class="fas fa-envelope"></i> Email
                 </a>
             </div>
+            
+            <!-- Pastki (Full-width) LinkedIn tugmasi -->
+            <a href="https://www.linkedin.com/in/lazizbek-akmalov?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="social-btn linkedin full-width">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            
         </div>
     </div>
+
+    <!-- JavaScript - Interaktiv funksiyalar uchun -->
+    <script>
+        // 1. Flashlight (Fonarik) Mantiqi
+        const flashlight = document.getElementById('flashlight-effect');
+        const toggleFlash = document.getElementById('toggle-flash');
+        let isFlashOn = false;
+
+        function updateFlashlight(e) {
+            if(!isFlashOn) return;
+            const x = e.clientX || (e.touches && e.touches[0].clientX);
+            const y = e.clientY || (e.touches && e.touches[0].clientY);
+            flashlight.style.background = `radial-gradient(circle 250px at ${x}px ${y}px, rgba(255,255,255,0.12), transparent 80%)`;
+        }
+
+        document.addEventListener('mousemove', updateFlashlight);
+        document.addEventListener('touchmove', updateFlashlight);
+
+        toggleFlash.addEventListener('click', () => {
+            isFlashOn = !isFlashOn;
+            flashlight.style.opacity = isFlashOn ? '1' : '0';
+            toggleFlash.classList.toggle('active');
+        });
+
+        // 2. Rang o'zgartirgich (Theme Changer) Mantiqi
+        const root = document.documentElement;
+        const toggleColor = document.getElementById('toggle-color');
+        
+        // 4 xil zamonaviy ranglar to'plami
+        const themes = [
+            { c1: '56, 189, 248', c2: '129, 140, 248' }, // 1. Ko'k-Binafsha (Asosiy)
+            { c1: '52, 211, 153', c2: '16, 185, 129' },  // 2. Zumrad-Yashil
+            { c1: '244, 114, 182', c2: '225, 29, 72' },  // 3. Pushti-Qizil
+            { c1: '250, 204, 21',  c2: '249, 115, 22' }   // 4. Sariq-Apelsin
+        ];
+        let themeIndex = 0;
+
+        toggleColor.addEventListener('click', () => {
+            themeIndex = (themeIndex + 1) % themes.length;
+            root.style.setProperty('--color-1', themes[themeIndex].c1);
+            root.style.setProperty('--color-2', themes[themeIndex].c2);
+            
+            // Tugmani biroz sakratib qoyish effekti
+            toggleColor.style.transform = 'scale(0.9)';
+            setTimeout(() => toggleColor.style.transform = 'scale(1.05)', 150);
+        });
+    </script>
 </body>
 </html>
