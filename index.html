@@ -76,8 +76,8 @@
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px; padding: 40px 30px;
-            text-align: center; max-width: 400px; width: 92vw;
+            border-radius: 24px; padding: 30px 20px;
+            text-align: center; max-width: 420px; width: 92vw;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
             animation: fadeInUp 0.8s ease-out forwards; opacity: 0;
             transform: translateY(40px); will-change: transform, opacity;
@@ -87,8 +87,8 @@
 
         /* Profil rasmi va neon hoshiya */
         .profile-pic-container {
-            position: relative; width: 120px; height: 120px;
-            margin: 0 auto 20px auto; animation: fadeInUp 0.8s ease-out 0.1s forwards; opacity: 0;
+            position: relative; width: 100px; height: 100px;
+            margin: 0 auto 12px auto; animation: fadeInUp 0.8s ease-out 0.1s forwards; opacity: 0;
         }
         .profile-pic-border {
             position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px;
@@ -99,7 +99,7 @@
         }
         .profile-pic {
             position: relative; width: 100%; height: 100%;
-            border-radius: 50%; background: #0f172a; z-index: 1; padding: 5px;
+            border-radius: 50%; background: #0f172a; z-index: 1; padding: 4px;
         }
         .profile-pic img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
@@ -110,22 +110,22 @@
 
         /* Ism */
         h1 {
-            font-size: 26px; font-weight: 600; margin-bottom: 20px; letter-spacing: 1px;
+            font-size: 22px; font-weight: 600; margin-bottom: 12px; letter-spacing: 1px;
             background: linear-gradient(to right, #ffffff, #94a3b8);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: fadeInUp 0.8s ease-out 0.2s forwards; opacity: 0;
         }
 
-        /* Menyu */
+        /* 4 talik Menyu (Tablar) */
         .nav-tabs {
             display: flex; background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px; padding: 4px; margin-bottom: 20px;
+            border-radius: 12px; padding: 3px; margin-bottom: 18px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             animation: fadeInUp 0.8s ease-out 0.3s forwards; opacity: 0;
         }
         .tab-btn {
             flex: 1; background: transparent; border: none; color: #94a3b8;
-            padding: 10px; font-size: 14px; font-weight: 500; cursor: pointer;
+            padding: 8px 2px; font-size: 11px; font-weight: 500; cursor: pointer;
             border-radius: 9px; transition: all 0.3s ease;
         }
         .tab-btn.active {
@@ -139,11 +139,11 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Fayllar menyusi */
-        .files-list { display: flex; flex-direction: column; gap: 12px; }
+        .files-list { display: flex; flex-direction: column; gap: 10px; }
         .file-item {
             display: flex; align-items: center; justify-content: space-between;
             background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 14px 15px; border-radius: 12px; text-decoration: none; color: #fff;
+            padding: 12px 14px; border-radius: 12px; text-decoration: none; color: #fff;
             transition: all 0.3s ease;
         }
         .file-item:hover {
@@ -151,20 +151,20 @@
             transform: translateY(-2px);
         }
         .file-info { display: flex; align-items: center; gap: 10px; text-align: left; }
-        .file-info i { font-size: 22px; color: #ef4444; }
-        .file-name { font-size: 14px; font-weight: 500; }
+        .file-info i { font-size: 20px; color: #ef4444; }
+        .file-name { font-size: 13px; font-weight: 500; }
         .download-icon { color: #94a3b8; transition: color 0.3s ease; }
         .file-item:hover .download-icon { color: #fff; }
         
         /* Nazorat tugmalari */
         .controls {
-            display: flex; justify-content: center; gap: 15px; margin-bottom: 25px;
+            display: flex; justify-content: center; gap: 12px; margin-bottom: 20px;
             animation: fadeInUp 0.8s ease-out 0.4s forwards; opacity: 0;
         }
         .control-btn {
             background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff; padding: 10px 18px; border-radius: 20px; font-size: 13px;
-            cursor: pointer; display: flex; align-items: center; gap: 8px;
+            color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 12px;
+            cursor: pointer; display: flex; align-items: center; gap: 6px;
             transition: all 0.3s ease;
         }
         .control-btn:hover { background: rgba(var(--color-1), 0.2); transform: scale(1.05); }
@@ -172,47 +172,76 @@
 
         /* Tarmoqlar */
         .social-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;
         }
         .social-btn {
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            padding: 14px 10px; border-radius: 14px; text-decoration: none; color: #fff;
-            font-size: 14px; font-weight: 500;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 12px 10px; border-radius: 12px; text-decoration: none; color: #fff;
+            font-size: 13px; font-weight: 500;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
             will-change: transform;
         }
-        .social-btn.full-width { grid-column: span 2; margin-top: 5px; }
+        .social-btn.full-width { grid-column: span 2; margin-top: 3px; }
         
-        .social-btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .social-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
         .social-btn.telegram:hover { background: #0088cc; border-color: #0088cc; }
         .social-btn.instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-color: transparent; }
         .social-btn.twitter:hover { background: #000000; border-color: #333333; color: #ffffff; }
         .social-btn.email:hover { background: #ea4335; border-color: #ea4335; }
         .social-btn.linkedin:hover { background: #0077b5; border-color: #0077b5; }
-        
-        .social-grid a:nth-child(1) { animation: fadeInUp 0.6s ease-out 0.5s forwards; opacity: 0; }
-        .social-grid a:nth-child(2) { animation: fadeInUp 0.6s ease-out 0.6s forwards; opacity: 0; }
-        .social-grid a:nth-child(3) { animation: fadeInUp 0.6s ease-out 0.7s forwards; opacity: 0; }
-        .social-grid a:nth-child(4) { animation: fadeInUp 0.6s ease-out 0.8s forwards; opacity: 0; }
-        .social-btn.linkedin { animation: fadeInUp 0.6s ease-out 0.9s forwards; opacity: 0; }
 
-        /* ISHONCHLI KO'RISHLAR SONI USLUBI */
-        .view-counter {
-            margin-top: 25px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 14px;
-            color: #94a3b8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            animation: fadeInUp 0.8s ease-out 1s forwards;
-            opacity: 0;
+        /* FAYL YUKLASH USLUBI */
+        .upload-container {
+            display: flex; flex-direction: column; gap: 12px; text-align: left;
         }
-        .view-counter img {
-            border-radius: 4px;
+        .upload-box {
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 14px; padding: 20px; text-align: center;
+            background: rgba(255, 255, 255, 0.02); cursor: pointer;
+            transition: all 0.3s ease; position: relative;
+        }
+        .upload-box:hover {
+            border-color: rgb(var(--color-1));
+            background: rgba(var(--color-1), 0.05);
+        }
+        .upload-box i { font-size: 32px; color: rgb(var(--color-1)); margin-bottom: 8px; }
+        .upload-box p { font-size: 13px; color: #94a3b8; }
+        .upload-box input[type="file"] {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; cursor: pointer;
+        }
+        .upload-btn {
+            background: rgba(var(--color-1), 0.2); border: 1px solid rgba(var(--color-1), 0.5);
+            color: #fff; padding: 12px; border-radius: 12px; font-size: 14px;
+            font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%;
+            text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .upload-btn:hover { background: rgba(var(--color-1), 0.4); transform: scale(1.02); }
+        #upload-status { font-size: 12px; color: #94a3b8; text-align: center; min-height: 18px; }
+
+        /* REAKSIYA O'YINI USLUBI */
+        .game-container { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+        #reaction-box {
+            width: 100%; height: 120px; border-radius: 14px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 14px; font-weight: 600; text-align: center;
+            padding: 15px; transition: background 0.2s ease; user-select: none;
+        }
+        .game-btn {
+            background: rgba(var(--color-1), 0.2); border: 1px solid rgba(var(--color-1), 0.5);
+            color: #fff; padding: 10px; border-radius: 12px; font-size: 13px;
+            font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%;
+        }
+        .game-btn:hover { background: rgba(var(--color-1), 0.4); transform: scale(1.02); }
+
+        /* Ko'rishlar soni hisoblagichi */
+        .view-counter {
+            margin-top: 18px; padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 12px; color: #94a3b8;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
         }
     </style>
 </head>
@@ -220,8 +249,6 @@
 
     <!-- Fonarik effekti -->
     <div id="flashlight-effect"></div>
-
-    <!-- Harakatlanuvchi orqa fon nurlari -->
     <div class="glow-1"></div>
     <div class="glow-2"></div>
     
@@ -237,9 +264,12 @@
             
             <h1>Lazizbek Akmalov</h1>
 
+            <!-- 4 Talik Menyu -->
             <div class="nav-tabs">
                 <button class="tab-btn active" onclick="switchTab('profile')">Asosiy</button>
                 <button class="tab-btn" onclick="switchTab('files')">Fayllarim</button>
+                <button class="tab-btn" onclick="switchTab('game')">O'yin</button>
+                <button class="tab-btn" onclick="switchTab('upload')">Fayl yuklash</button>
             </div>
 
             <!-- 1. ASOSIY PROFIL BO'LIMI -->
@@ -294,7 +324,30 @@
                 </div>
             </div>
 
-            <!-- ISHONCHLI HISOBLAGICH QISMI -->
+            <!-- 3. O'YIN BO'LIMI -->
+            <div id="game-view" class="view-section">
+                <div class="game-container">
+                    <div id="reaction-box" onclick="handleGameClick()">"Boshlash" tugmasini bosing</div>
+                    <button class="game-btn" id="game-control-btn" onclick="startGame()">Boshlash</button>
+                </div>
+            </div>
+
+            <!-- 4. FAYL YUKLASH BO'LIMI -->
+            <div id="upload-view" class="view-section">
+                <div class="upload-container">
+                    <div class="upload-box">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p id="file-label">Faylni tanlang yoki shu yerga tashlang</p>
+                        <input type="file" id="file-input" onchange="updateFileName()">
+                    </div>
+                    <button class="upload-btn" onclick="uploadToDrive()">
+                        <i class="fas fa-paper-plane"></i> Google Drive'ga Yuborish
+                    </button>
+                    <div id="upload-status"></div>
+                </div>
+            </div>
+
+            <!-- Ko'rishlar soni hisoblagichi -->
             <div class="view-counter">
                 <i class="fas fa-eye"></i> Saytga kirishlar soni: 
                 <img src="https://profile-counter.glitch.me/lazizbekakmalov/count.svg" alt="Ko'rishlar soni">
@@ -304,22 +357,135 @@
     </div>
 
     <script>
-        // Tab o'zgartirish
+        // Tab o'zgartirish funksiyasi
         function switchTab(tabName) {
-            const profileView = document.getElementById('profile-view');
-            const filesView = document.getElementById('files-view');
+            const views = ['profile-view', 'files-view', 'game-view', 'upload-view'];
             const buttons = document.querySelectorAll('.tab-btn');
 
             buttons.forEach(btn => btn.classList.remove('active'));
+            views.forEach(id => document.getElementById(id).classList.remove('active-view'));
 
             if (tabName === 'profile') {
-                profileView.classList.add('active-view');
-                filesView.classList.remove('active-view');
+                document.getElementById('profile-view').classList.add('active-view');
                 buttons[0].classList.add('active');
-            } else {
-                filesView.classList.add('active-view');
-                profileView.classList.remove('active-view');
+            } else if (tabName === 'files') {
+                document.getElementById('files-view').classList.add('active-view');
                 buttons[1].classList.add('active');
+            } else if (tabName === 'game') {
+                document.getElementById('game-view').classList.add('active-view');
+                buttons[2].classList.add('active');
+            } else if (tabName === 'upload') {
+                document.getElementById('upload-view').classList.add('active-view');
+                buttons[3].classList.add('active');
+            }
+        }
+
+        // Fayl tanlanganda nomini chiqarish
+        function updateFileName() {
+            const fileInput = document.getElementById('file-input');
+            const fileLabel = document.getElementById('file-label');
+            if (fileInput.files.length > 0) {
+                fileLabel.innerText = "Tanlandi: " + fileInput.files[0].name;
+            }
+        }
+
+        // Google Drive'ga yuborish funksiyasi
+        function uploadToDrive() {
+            const fileInput = document.getElementById('file-input');
+            const statusDiv = document.getElementById('upload-status');
+
+            if (fileInput.files.length === 0) {
+                statusDiv.style.color = '#ef4444';
+                statusDiv.innerText = "Iltimos, avval fayl tanlang!";
+                return;
+            }
+
+            const file = fileInput.files[0];
+            statusDiv.style.color = '#38bdf8';
+            statusDiv.innerText = "Yuklanmoqda, iltimos kuting...";
+
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                const rawData = reader.result.split(',')[1];
+                const data = {
+                    fileName: file.name,
+                    mimeType: file.type,
+                    fileData: rawData
+                };
+
+                const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+
+                if (SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
+                    statusDiv.style.color = '#f59e0b';
+                    statusDiv.innerText = "Hali Google Drive skript manzili ulanmagan!";
+                    return;
+                }
+
+                fetch(SCRIPT_URL, {
+                    method: "POST",
+                    body: JSON.stringify(data)
+                })
+                .then(res => res.text())
+                .then(response => {
+                    statusDiv.style.color = '#10b981';
+                    statusDiv.innerText = "Muvaffaqiyatli yuborildi! 5 TB Drive'ingizga tushdi ✅";
+                    fileInput.value = "";
+                    document.getElementById('file-label').innerText = "Faylni tanlang yoki shu yerga tashlang";
+                })
+                .catch(error => {
+                    statusDiv.style.color = '#ef4444';
+                    statusDiv.innerText = "Xatolik yuz berdi. Qaytadan urinib ko'ring.";
+                });
+            };
+        }
+
+        // Reaksiya o'yini mantiqi
+        let gameState = 'IDLE'; 
+        let startTime = 0;
+        let timeoutId = null;
+
+        function startGame() {
+            const box = document.getElementById('reaction-box');
+            const btn = document.getElementById('game-control-btn');
+            
+            gameState = 'WAITING';
+            box.style.background = 'rgba(239, 68, 68, 0.2)';
+            box.style.borderColor = '#ef4444';
+            box.innerText = 'Yashil rangga o\'tishini kuting...';
+            btn.style.display = 'none';
+
+            const randomTime = Math.random() * 2000 + 1500;
+
+            timeoutId = setTimeout(() => {
+                gameState = 'READY';
+                box.style.background = 'rgba(16, 185, 129, 0.4)';
+                box.style.borderColor = '#10b981';
+                box.innerText = 'HOZIR BOSING!';
+                startTime = performance.now();
+            }, randomTime);
+        }
+
+        function handleGameClick() {
+            const box = document.getElementById('reaction-box');
+            const btn = document.getElementById('game-control-btn');
+
+            if (gameState === 'WAITING') {
+                clearTimeout(timeoutId);
+                gameState = 'IDLE';
+                box.style.background = 'rgba(239, 68, 68, 0.3)';
+                box.innerText = 'Juda erta bosdingiz! Qaytadan urinib ko\'ring.';
+                btn.style.display = 'block';
+                btn.innerText = 'Qayta boshlash';
+            } else if (gameState === 'READY') {
+                const endTime = performance.now();
+                const reactionTime = Math.round(endTime - startTime);
+                gameState = 'IDLE';
+                box.style.background = 'rgba(255, 255, 255, 0.05)';
+                box.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                box.innerText = `Natijangiz: ${reactionTime} ms ⚡`;
+                btn.style.display = 'block';
+                btn.innerText = 'Yana o\'ynash';
             }
         }
 
