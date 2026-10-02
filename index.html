@@ -197,23 +197,22 @@
         .social-grid a:nth-child(4) { animation: fadeInUp 0.6s ease-out 0.8s forwards; opacity: 0; }
         .social-btn.linkedin { animation: fadeInUp 0.6s ease-out 0.9s forwards; opacity: 0; }
 
-        /* Ko'rishlar soni uchun uslub */
+        /* ISHONCHLI KO'RISHLAR SONI USLUBI */
         .view-counter {
             margin-top: 25px;
             padding-top: 15px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 13px;
+            font-size: 14px;
             color: #94a3b8;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             animation: fadeInUp 0.8s ease-out 1s forwards;
             opacity: 0;
         }
-        .view-counter span {
-            color: #fff;
-            font-weight: 600;
+        .view-counter img {
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -295,9 +294,10 @@
                 </div>
             </div>
 
-            <!-- Ko'rishlar soni hisoblagichi -->
+            <!-- ISHONCHLI HISOBLAGICH QISMI -->
             <div class="view-counter">
-                <i class="fas fa-eye"></i> Saytga kirishlar soni: <span id="view-count">...</span>
+                <i class="fas fa-eye"></i> Saytga kirishlar soni: 
+                <img src="https://profile-counter.glitch.me/lazizbekakmalov/count.svg" alt="Ko'rishlar soni">
             </div>
             
         </div>
@@ -364,16 +364,6 @@
             toggleColor.style.transform = 'scale(0.9)';
             setTimeout(() => toggleColor.style.transform = 'scale(1.05)', 150);
         });
-
-        // Ko'rishlar sonini hisoblash API si
-        fetch('https://api.counterapi.dev/v1/akmalov_site/visits')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('view-count').innerText = data.count;
-            })
-            .catch(error => {
-                document.getElementById('view-count').innerText = "1";
-            });
     </script>
 </body>
 </html>
