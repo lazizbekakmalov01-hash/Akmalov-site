@@ -426,13 +426,6 @@
                 };
 
                 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby2QT4Ek6XthjD7rcAecYcKtZ2R_ehrC6_KYZRnBmvLjkmttd2chYYDfCbZAxVRnIqU/exec";
-
-                if (SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
-                    statusDiv.style.color = '#f59e0b';
-                    statusDiv.innerText = "Hali Google Drive skript manzili ulanmagan!";
-                    return;
-                }
-
                 fetch(SCRIPT_URL, {
                     method: "POST",
                     body: JSON.stringify(data)
