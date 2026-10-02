@@ -26,7 +26,9 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            /* Xatolik sababi bo'lgan overflow: hidden olib tashlandi, o'rniga pastdagisi yozildi: */
+            overflow-x: hidden; 
+            padding: 30px 10px; /* Telefonlarda qotib qolmasligi uchun */
             position: relative;
         }
 
@@ -93,8 +95,7 @@
         .profile-pic-border {
             position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px;
             background: linear-gradient(45deg, rgb(var(--color-1)), rgb(var(--color-2)), rgb(var(--color-1)), rgb(var(--color-2)));
-
-background-size: 300% 300%; border-radius: 50%;
+            background-size: 300% 300%; border-radius: 50%;
             z-index: 0; animation: rotateGradient 4s linear infinite;
             transition: background 0.5s ease;
         }
@@ -174,8 +175,7 @@ background-size: 300% 300%; border-radius: 50%;
         /* Tarmoqlar */
         .social-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;
-
-}
+        }
         .social-btn {
             display: flex; align-items: center; justify-content: center; gap: 8px;
             padding: 12px 10px; border-radius: 12px; text-decoration: none; color: #fff;
@@ -244,7 +244,7 @@ background-size: 300% 300%; border-radius: 50%;
         .game-btn:hover { background: rgba(var(--color-1), 0.4); transform: scale(1.02); }
         #game-message { font-size: 13px; font-weight: 500; color: #38bdf8; min-height: 20px; }
 
-/* Ko'rishlar soni hisoblagichi (Aniq ishlaydigan versiya) */
+        /* Ko'rishlar soni hisoblagichi */
         .view-counter {
             margin-top: 18px; padding-top: 10px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -275,10 +275,10 @@ background-size: 300% 300%; border-radius: 50%;
 
             <!-- 4 Talik Menyu -->
             <div class="nav-tabs">
-                <button class="tab-btn active" onclick="switchTab('profile')">Asosiy</button>
-                <button class="tab-btn" onclick="switchTab('files')">Fayllarim</button>
-                <button class="tab-btn" onclick="switchTab('game')">O'yin</button>
-                <button class="tab-btn" onclick="switchTab('upload')">Ulashish</button>
+                <button class="tab-btn active" type="button" onclick="switchTab('profile')">Asosiy</button>
+                <button class="tab-btn" type="button" onclick="switchTab('files')">Fayllarim</button>
+                <button class="tab-btn" type="button" onclick="switchTab('game')">O'yin</button>
+                <button class="tab-btn" type="button" onclick="switchTab('upload')">Ulashish</button>
             </div>
 
             <!-- 1. ASOSIY PROFIL BO'LIMI -->
@@ -325,8 +325,7 @@ background-size: 300% 300%; border-radius: 50%;
 
                     <a href="The Globe and Mail - Se....pdf" target="_blank" download class="file-item">
                         <div class="file-info">
-
-<i class="fas fa-file-pdf"></i>
+                            <i class="fas fa-file-pdf"></i>
                             <span class="file-name">The Globe and Mail.pdf</span>
                         </div>
                         <i class="fas fa-download download-icon"></i>
@@ -362,7 +361,7 @@ background-size: 300% 300%; border-radius: 50%;
                 </div>
             </div>
 
-            <!-- Aniq ishlaydigan Ko'rishlar soni hisoblagichi -->
+            <!-- Ko'rishlar soni hisoblagichi -->
             <div class="view-counter">
                 <i class="fas fa-eye"></i> Saytga kirishlar soni: <span id="visit-count">Yuklanmoqda...</span>
             </div>
@@ -371,27 +370,20 @@ background-size: 300% 300%; border-radius: 50%;
     </div>
 
     <script>
-        // Tab o'zgartirish funksiyasi
+        // Yaxshilangan va mustahkamlangan Tab o'zgartirish funksiyasi
         function switchTab(tabName) {
-            const views = ['profile-view', 'files-view', 'game-view', 'upload-view'];
-            const buttons = document.querySelectorAll('.tab-btn');
+            // Hamma menyularni yopish va aktiv holatdan chiqarish
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.view-section').forEach(section => section.classList.remove('active-view'));
 
-            buttons.forEach(btn => btn.classList.remove('active'));
-            views.forEach(id => document.getElementById(id).classList.remove('active-view'));
-
-            if (tabName === 'profile') {
-                document.getElementById('profile-view').classList.add('active-view');
-                buttons[0].classList.add('active');
-            } else if (tabName === 'files') {
-                document.getElementById('files-view').classList.add('active-view');
-                buttons[1].classList.add('active');
-            } else if (tabName === 'game') {
-                document.getElementById('game-view').classList.add('active-view');
-                buttons[2].classList.add('active');
-            } else if (tabName === 'upload') {
-                document.getElementById('upload-view').classList.add('active-view');
-                buttons[3].classList.add('active');
-            }
+            // Tanlangan menyuni ko'rsatish
+            document.getElementById(tabName + '-view').classList.add('active-view');
+            
+            // Tanlangan tugmani faollashtirish
+            if (tabName === 'profile') document.querySelectorAll('.tab-btn')[0].classList.add('active');
+            if (tabName === 'files') document.querySelectorAll('.tab-btn')[1].classList.add('active');
+            if (tabName === 'game') document.querySelectorAll('.tab-btn')[2].classList.add('active');
+            if (tabName === 'upload') document.querySelectorAll('.tab-btn')[3].classList.add('active');
         }
 
         // Fayl tanlanganda nomini chiqarish
@@ -414,7 +406,7 @@ background-size: 300% 300%; border-radius: 50%;
                 return;
             }
 
-const file = fileInput.files[0];
+            const file = fileInput.files[0];
             statusDiv.style.color = '#38bdf8';
             statusDiv.innerText = "Yuklanmoqda, iltimos kuting...";
 
@@ -456,7 +448,7 @@ const file = fileInput.files[0];
             const message = document.getElementById('game-message');
             const userGuess = Number(input.value);
 
-            if (!userGuess  userGuess < 1  userGuess > 100) {
+            if (!userGuess || userGuess < 1 || userGuess > 100) {
                 message.style.color = '#ef4444';
                 message.innerText = "1 dan 100 gacha raqam kiriting!";
                 return;
@@ -466,7 +458,7 @@ const file = fileInput.files[0];
 
             if (userGuess === secretNumber) {
                 message.style.color = '#10b981';
-                message.innerText = Tabriklaymiz! ${attempts} ta urinishda topdingiz! 🎉;
+                message.innerText = `Tabriklaymiz! ${attempts} ta urinishda topdingiz! 🎉`;
                 secretNumber = Math.floor(Math.random() * 100) + 1; // Yangi o'yin
                 attempts = 0;
             } else if (userGuess < secretNumber) {
@@ -498,7 +490,7 @@ const file = fileInput.files[0];
             if(!isFlashOn) return;
             const x = e.clientX || (e.touches && e.touches[0].clientX);
             const y = e.clientY || (e.touches && e.touches[0].clientY);
-            flashlight.style.background = radial-gradient(circle 300px at ${x}px ${y}px, rgba(255,255,255,0.25), transparent 80%);
+            flashlight.style.background = `radial-gradient(circle 300px at ${x}px ${y}px, rgba(255,255,255,0.25), transparent 80%)`;
         }
 
         document.addEventListener('mousemove', updateFlashlight);
@@ -510,7 +502,7 @@ const file = fileInput.files[0];
             toggleFlash.classList.toggle('active');
         });
 
-// Rang o'zgartirgich 
+        // Rang o'zgartirgich 
         const root = document.documentElement;
         const toggleColor = document.getElementById('toggle-color');
         
