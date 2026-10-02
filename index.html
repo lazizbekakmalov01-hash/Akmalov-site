@@ -3,195 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akmalov | Shaxsiy Sayt</title>
+    <title>Lazizbek Akmalov | Shaxsiy Sahifa</title>
+    <!-- Google shriftlar va ikonkalarni ulash -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        :root {
-            --bg-color: #f4f4f9;
-            --text-color: #333;
-            --card-bg: #fff;
-            --primary-color: #007bff;
-            --hover-color: #0056b3;
-            --transition: all 0.3s ease;
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --card-bg: #1e1e1e;
-            --primary-color: #bb86fc;
-            --hover-color: #9965f4;
-        }
-
+        /* Asosiy sozlamalar */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
-
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: var(--transition);
+            background: #070b19; /* Tungi chuqur rang */
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Yangi kuchli animatsiyali orqa fon chiroqlari */
+        .glow-1, .glow-2 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: -1;
+            animation: floatOrb 8s infinite alternate ease-in-out;
+        }
+        .glow-1 {
+            width: 400px; height: 400px;
+            background: rgba(56, 189, 248, 0.35);
+            top: 5%; left: 10%;
+        }
+        .glow-2 {
+            width: 350px; height: 350px;
+            background: rgba(129, 140, 248, 0.25);
+            bottom: 5%; right: 10%;
+            animation-delay: -4s;
+        }
+        
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, 60px) scale(1.3); }
         }
 
-        .container {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        /* Suzib turuvchi karta wrapper'i */
+        .card-wrapper {
+            animation: floatCard 6s ease-in-out infinite;
+        }
+        
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Karta dizayni va kirib kelish animatsiyasi */
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 45px 40px;
             text-align: center;
-            max-width: 400px;
-            width: 100%;
-            transition: var(--transition);
+            max-width: 380px;
+            width: 90vw;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(40px);
         }
 
-        .profile-img {
-            width: 120px;
-            height: 120px;
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Profil rasmi va aylanuvchi neon halqa */
+        .profile-pic-container {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 25px auto;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+        .profile-pic-border {
+            position: absolute;
+            top: -4px; left: -4px; right: -4px; bottom: -4px;
+            background: linear-gradient(45deg, #38bdf8, #818cf8, #38bdf8, #818cf8);
+            background-size: 300% 300%;
+            border-radius: 50%;
+            z-index: 0;
+            animation: rotateGradient 4s linear infinite;
+        }
+        .profile-pic {
+            position: relative;
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            background: #0f172a;
+            z-index: 1;
+            padding: 5px;
+        }
+        .profile-pic img {
+            width: 100%; height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 20px;
-            border: 4px solid var(--primary-color);
         }
 
+        @keyframes rotateGradient {
+            0% { background-position: 0% 50%; transform: rotate(0deg); }
+            100% { background-position: 100% 50%; transform: rotate(360deg); }
+        }
+
+        /* Matnlar dizayni va animatsiyasi */
         h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
+            font-size: 26px; font-weight: 600; margin-bottom: 5px; letter-spacing: 1px;
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+            opacity: 0;
         }
-
-        p {
-            font-size: 16px;
-            color: #777;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-        
-        [data-theme="dark"] p {
-             color: #aaa;
-        }
-
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .link-btn {
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 15px 20px;
-            border-radius: 10px;
-            font-weight: 600;
-            border: 2px solid var(--primary-color);
-            transition: var(--transition);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .link-btn:hover {
-            background-color: var(--primary-color);
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-        }
-
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--text-color);
-            transition: var(--transition);
+        p { 
+            font-size: 14px; color: #94a3b8; margin-bottom: 35px;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+            opacity: 0;
         }
         
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        .contact-section {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
+        /* Tugmalar dizayni va sakrash (bouncy) hover effekti */
+        .social-links { display: flex; flex-direction: column; gap: 16px; }
+        .social-btn {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            width: 100%; padding: 15px; border-radius: 14px;
+            text-decoration: none; color: #fff; font-size: 15px; font-weight: 500;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative; overflow: hidden;
+            z-index: 1;
         }
         
-        [data-theme="dark"] .contact-section {
-            border-top: 1px solid #444;
+        .social-btn:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
         }
-
-        .contact-btn {
-            background-color: var(--primary-color);
-            color: #fff;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: var(--transition);
+        .social-btn.telegram:hover { background: #0088cc; border-color: #0088cc; }
+        .social-btn.instagram:hover {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            border-color: transparent;
         }
-
-        .contact-btn:hover {
-            background-color: var(--hover-color);
-        }
+        .social-btn.twitter:hover { background: #000000; border-color: #333333; color: #ffffff; }
+        .social-btn.email:hover { background: #ea4335; border-color: #ea4335; }
+        
+        /* Tugmalarning ketma-ket kirib kelishi */
+        .social-btn:nth-child(1) { animation: fadeInUp 0.8s ease-out 0.8s forwards; opacity: 0; }
+        .social-btn:nth-child(2) { animation: fadeInUp 0.8s ease-out 1.0s forwards; opacity: 0; }
+        .social-btn:nth-child(3) { animation: fadeInUp 0.8s ease-out 1.2s forwards; opacity: 0; }
+        .social-btn:nth-child(4) { animation: fadeInUp 0.8s ease-out 1.4s forwards; opacity: 0; }
     </style>
 </head>
 <body>
+    <!-- Harakatlanuvchi orqa fon nurlari -->
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+    
+    <!-- Havoda suzib turuvchi o'ram -->
+    <div class="card-wrapper">
+        <div class="card">
+            <!-- Aylanuvchi neon hoshiyali rasm -->
+            <div class="profile-pic-container">
+                <div class="profile-pic-border"></div>
+                <div class="profile-pic">
+                    <img src="https://ui-avatars.com/api/?name=Lazizbek+Akmalov&background=38bdf8&color=fff&size=200" alt="Lazizbek Akmalov">
+                </div>
+            </div>
+            
+            <h1>Lazizbek Akmalov</h1>
+            <p>Xalqaro munosabatlar va IT sohasi qiziquvchisi</p>
+            
+            <div class="social-links">
+                <a href="https://t.me/akmalov_lazizbek" target="_blank" class="social-btn telegram">
+                    <i class="fab fa-telegram-plane"></i> Telegram
+                </a>
+                
+                <a href="https://instagram.com/lazizbek_akmalov" target="_blank" class="social-btn instagram">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
 
-    <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">🌙</button>
-
-    <div class="container">
-        <!-- Rasm uchun joy (keyin o'z rasmingizni qo'yasiz) -->
-        <img src="https://ui-avatars.com/api/?name=Akmalov&background=007bff&color=fff&size=120" alt="Profile Picture" class="profile-img">
-        
-        <h1>Akmalov</h1>
-        <p>Xush kelibsiz! Men texnologiyalar va dasturlashga qiziqaman. Mening barcha tarmoqlarim quyida joylashgan.</p>
-
-        <div class="links-container">
-            <a href="https://t.me/username" target="_blank" class="link-btn">Telegram</a>
-            <a href="https://instagram.com/username" target="_blank" class="link-btn">Instagram</a>
-            <a href="https://github.com/username" target="_blank" class="link-btn">GitHub</a>
-        </div>
-
-        <div class="contact-section">
-            <button class="contact-btn" onclick="window.location.href='mailto:email@example.com'">Men bilan bog'lanish</button>
+                <a href="https://x.com/akmalov86358" target="_blank" class="social-btn twitter">
+                    <i class="fab fa-x-twitter"></i> X (Twitter)
+                </a>
+                
+                <a href="mailto:lazizbekakmalov01@gmail.com" class="social-btn email">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
         </div>
     </div>
-
-    <script>
-        // Tun/Kun rejimini boshqarish
-        const toggleTheme = () => {
-            const body = document.body;
-            const themeBtn = document.getElementById('theme-btn');
-            
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.removeAttribute('data-theme');
-                themeBtn.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeBtn.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            }
-        };
-
-        // Sayt yuklanganda saqlangan rejimni tekshirish
-        window.onload = () => {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.setAttribute('data-theme', 'dark');
-                document.getElementById('theme-btn').textContent = '☀️';
-            }
-        };
-    </script>
 </body>
 </html>
