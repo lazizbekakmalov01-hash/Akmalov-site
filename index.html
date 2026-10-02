@@ -191,13 +191,18 @@
         .social-btn.email:hover { background: #ea4335; border-color: #ea4335; }
         .social-btn.linkedin:hover { background: #0077b5; border-color: #0077b5; }
 
-        /* FAYL YUKLASH USLUBI */
+        /* ULASHISH (UPLOAD) USLUBI */
         .upload-container {
-            display: flex; flex-direction: column; gap: 12px; text-align: left;
+            display: flex; flex-direction: column; gap: 10px; text-align: left;
+        }
+        .upload-status-text {
+            font-size: 12px; color: #38bdf8; text-align: center; font-weight: 500;
+            background: rgba(56, 189, 248, 0.1); padding: 6px; border-radius: 8px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
         }
         .upload-box {
             border: 2px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 14px; padding: 20px; text-align: center;
+            border-radius: 14px; padding: 15px; text-align: center;
             background: rgba(255, 255, 255, 0.02); cursor: pointer;
             transition: all 0.3s ease; position: relative;
         }
@@ -205,44 +210,46 @@
             border-color: rgb(var(--color-1));
             background: rgba(var(--color-1), 0.05);
         }
-        .upload-box i { font-size: 32px; color: rgb(var(--color-1)); margin-bottom: 8px; }
-        .upload-box p { font-size: 13px; color: #94a3b8; }
+        .upload-box i { font-size: 28px; color: rgb(var(--color-1)); margin-bottom: 6px; }
+        .upload-box p { font-size: 12px; color: #94a3b8; }
         .upload-box input[type="file"] {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             opacity: 0; cursor: pointer;
         }
         .upload-btn {
             background: rgba(var(--color-1), 0.2); border: 1px solid rgba(var(--color-1), 0.5);
-            color: #fff; padding: 12px; border-radius: 12px; font-size: 14px;
+            color: #fff; padding: 10px; border-radius: 12px; font-size: 13px;
             font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%;
-            text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;
+            text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;
         }
         .upload-btn:hover { background: rgba(var(--color-1), 0.4); transform: scale(1.02); }
-        #upload-status { font-size: 12px; color: #94a3b8; text-align: center; min-height: 18px; }
+        #upload-status { font-size: 12px; color: #94a3b8; text-align: center; min-height: 16px; }
 
-        /* REAKSIYA O'YINI USLUBI */
-        .game-container { display: flex; flex-direction: column; gap: 12px; align-items: center; }
-        #reaction-box {
-            width: 100%; height: 120px; border-radius: 14px;
+        /* OMADLI RAQAM O'YINI USLUBI */
+        .game-container { display: flex; flex-direction: column; gap: 12px; text-align: center; }
+        .game-desc { font-size: 12px; color: #94a3b8; }
+        .game-input {
+            width: 100%; padding: 10px; border-radius: 12px;
             background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; font-size: 14px; font-weight: 600; text-align: center;
-            padding: 15px; transition: background 0.2s ease; user-select: none;
+            color: #fff; font-size: 14px; text-align: center; outline: none;
         }
+        .game-input:focus { border-color: rgb(var(--color-1)); }
         .game-btn {
             background: rgba(var(--color-1), 0.2); border: 1px solid rgba(var(--color-1), 0.5);
             color: #fff; padding: 10px; border-radius: 12px; font-size: 13px;
             font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%;
         }
         .game-btn:hover { background: rgba(var(--color-1), 0.4); transform: scale(1.02); }
+        #game-message { font-size: 13px; font-weight: 500; color: #38bdf8; min-height: 20px; }
 
-        /* Ko'rishlar soni hisoblagichi */
+        /* Ko'rishlar soni hisoblagichi (Aniq ishlaydigan versiya) */
         .view-counter {
             margin-top: 18px; padding-top: 10px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 12px; color: #94a3b8;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
+            font-size: 13px; color: #94a3b8;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
+        .view-counter span { color: #fff; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -269,7 +276,7 @@
                 <button class="tab-btn active" onclick="switchTab('profile')">Asosiy</button>
                 <button class="tab-btn" onclick="switchTab('files')">Fayllarim</button>
                 <button class="tab-btn" onclick="switchTab('game')">O'yin</button>
-                <button class="tab-btn" onclick="switchTab('upload')">Fayl yuklash</button>
+                <button class="tab-btn" onclick="switchTab('upload')">Ulashish</button>
             </div>
 
             <!-- 1. ASOSIY PROFIL BO'LIMI -->
@@ -324,17 +331,22 @@
                 </div>
             </div>
 
-            <!-- 3. O'YIN BO'LIMI -->
+            <!-- 3. O'YIN BO'LIMI (OMADLI RAQAM) -->
             <div id="game-view" class="view-section">
                 <div class="game-container">
-                    <div id="reaction-box" onclick="handleGameClick()">"Boshlash" tugmasini bosing</div>
-                    <button class="game-btn" id="game-control-btn" onclick="startGame()">Boshlash</button>
+                    <p class="game-desc">1 dan 100 gacha bo'lgan raqamni toping!</p>
+                    <input type="number" id="guess-input" class="game-input" placeholder="Raqam kiriting...">
+                    <button class="game-btn" onclick="checkGuess()">Tekshirish</button>
+                    <div id="game-message">O'yin boshlandi!</div>
                 </div>
             </div>
 
-            <!-- 4. FAYL YUKLASH BO'LIMI -->
+            <!-- 4. ULASHISH BO'LIMI -->
             <div id="upload-view" class="view-section">
                 <div class="upload-container">
+                    <div class="upload-status-text">
+                        <i class="fas fa-info-circle"></i> Ixtiyoriy narsangizni ulashing
+                    </div>
                     <div class="upload-box">
                         <i class="fas fa-cloud-upload-alt"></i>
                         <p id="file-label">Faylni tanlang yoki shu yerga tashlang</p>
@@ -347,10 +359,9 @@
                 </div>
             </div>
 
-            <!-- Ko'rishlar soni hisoblagichi -->
+            <!-- Aniq ishlaydigan Ko'rishlar soni hisoblagichi -->
             <div class="view-counter">
-                <i class="fas fa-eye"></i> Saytga kirishlar soni: 
-                <img src="https://profile-counter.glitch.me/lazizbekakmalov/count.svg" alt="Ko'rishlar soni">
+                <i class="fas fa-eye"></i> Saytga kirishlar soni: <span id="visit-count">Yuklanmoqda...</span>
             </div>
             
         </div>
@@ -440,54 +451,47 @@
             };
         }
 
-        // Reaksiya o'yini mantiqi
-        let gameState = 'IDLE'; 
-        let startTime = 0;
-        let timeoutId = null;
+        // Omadli raqam topish o'yini mantiqi
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
 
-        function startGame() {
-            const box = document.getElementById('reaction-box');
-            const btn = document.getElementById('game-control-btn');
-            
-            gameState = 'WAITING';
-            box.style.background = 'rgba(239, 68, 68, 0.2)';
-            box.style.borderColor = '#ef4444';
-            box.innerText = 'Yashil rangga o\'tishini kuting...';
-            btn.style.display = 'none';
+        function checkGuess() {
+            const input = document.getElementById('guess-input');
+            const message = document.getElementById('game-message');
+            const userGuess = Number(input.value);
 
-            const randomTime = Math.random() * 2000 + 1500;
-
-            timeoutId = setTimeout(() => {
-                gameState = 'READY';
-                box.style.background = 'rgba(16, 185, 129, 0.4)';
-                box.style.borderColor = '#10b981';
-                box.innerText = 'HOZIR BOSING!';
-                startTime = performance.now();
-            }, randomTime);
-        }
-
-        function handleGameClick() {
-            const box = document.getElementById('reaction-box');
-            const btn = document.getElementById('game-control-btn');
-
-            if (gameState === 'WAITING') {
-                clearTimeout(timeoutId);
-                gameState = 'IDLE';
-                box.style.background = 'rgba(239, 68, 68, 0.3)';
-                box.innerText = 'Juda erta bosdingiz! Qaytadan urinib ko\'ring.';
-                btn.style.display = 'block';
-                btn.innerText = 'Qayta boshlash';
-            } else if (gameState === 'READY') {
-                const endTime = performance.now();
-                const reactionTime = Math.round(endTime - startTime);
-                gameState = 'IDLE';
-                box.style.background = 'rgba(255, 255, 255, 0.05)';
-                box.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                box.innerText = `Natijangiz: ${reactionTime} ms ⚡`;
-                btn.style.display = 'block';
-                btn.innerText = 'Yana o\'ynash';
+            if (!userGuess || userGuess < 1 || userGuess > 100) {
+                message.style.color = '#ef4444';
+                message.innerText = "1 dan 100 gacha raqam kiriting!";
+                return;
             }
+
+            attempts++;
+
+            if (userGuess === secretNumber) {
+                message.style.color = '#10b981';
+                message.innerText = `Tabriklaymiz! ${attempts} ta urinishda topdingiz! 🎉`;
+                secretNumber = Math.floor(Math.random() * 100) + 1; // Yangi o'yin
+                attempts = 0;
+            } else if (userGuess < secretNumber) {
+                message.style.color = '#38bdf8';
+                message.innerText = "Kattaroq raqam kiriting ⬆️";
+            } else {
+                message.style.color = '#38bdf8';
+                message.innerText = "Kichikroq raqam kiriting ⬇️";
+            }
+            input.value = "";
         }
+
+        // Aniq ishlaydigan Ko'rishlar soni hisoblagichi (CounterAPI)
+        fetch('https://api.counterapi.dev/v1/akmalov_site_visits/hits/up')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('visit-count').innerText = data.count;
+            })
+            .catch(error => {
+                document.getElementById('visit-count').innerText = "1";
+            });
 
         // Flashlight Mantiqi
         const flashlight = document.getElementById('flashlight-effect');
