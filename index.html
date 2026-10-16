@@ -353,8 +353,6 @@
 
     <script>
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwZPWnIXpgm6B1SjSJy1tapxqOGbb5SvbqF6Vjq3quBUWjOrMqhvNt7Fw8AXAwSFCKg/exec";
-        const BOT_TOKEN = "8855104595:AAG4QC_OGS1yrSxnZDuF0MHTxtTd7ZMCn68";
-        const CHAT_ID = "8781718740";
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -450,11 +448,10 @@
             input.value = "";
         }
 
-        // YANGI TASHRIF TIZIMI (To'g'ridan-to'g'ri Telegram + Global Counter)
+        // TASHRIF VA GOOGLE SHEETS ORQALI HISOB_KITOB
         async function trackVisitor() {
             let ip = "Noma'lum", country = "Noma'lum", city = "Noma'lum";
 
-            // 1. Manzilni aniqlash (2 ta zaxira server bilan — AdBlock bloklasa ham ishlaydi)
             try {
                 const res = await fetch('https://ipwho.is/');
                 const data = await res.json();
@@ -473,56 +470,29 @@
                 } catch (e2) {}
             }
 
-            // 2. Saytdagi ko'rishlar sonini oshirish va ko'rsatish
-            let visitCount = 1;
             try {
-                const countRes = await fetch('https://api.counterapi.dev/v1/lazizbek_akmalov_site_2026/visits/up');
-                const countData = await countRes.json();
-                if (countData && countData.count) {
-                    visitCount = countData.count;
+                const sheetRes = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain" },
+                    body: JSON.stringify({
+                        ip: ip,
+                        country: country,
+                        city: city,
+                        userAgent: navigator.userAgent,
+                        page: window.location.pathname
+                    })
+                });
+                const sheetData = await sheetRes.json();
+                if (sheetData && sheetData.visits) {
+                    document.getElementById('visit-count').innerText = sheetData.visits;
+                } else {
+                    document.getElementById('visit-count').innerText = "1";
                 }
-            } catch (e) {
-                let local = parseInt(localStorage.getItem('akmalov_visits') || "1") + 1;
-                localStorage.setItem('akmalov_visits', local);
-                visitCount = local;
+            } catch (err) {
+                document.getElementById('visit-count').innerText = "1";
             }
-            document.getElementById('visit-count').innerText = visitCount;
-
-            // 3. To'g'ridan-to'g'ri Telegram botingizga xabar jo'natish (100% bexato)
-            const now = new Date().toLocaleString("uz-UZ", { timeZone: "Asia/Tashkent" });
-            const textMsg = 
-                `🔔 <b>Akmalov.site — Yangi tashrif!</b>\n\n` +
-                `🌐 <b>IP:</b> <code>${ip}</code>\n` +
-                `📍 <b>Manzil:</b> ${country}, ${city}\n` +
-                `🕒 <b>Vaqt:</b> ${now}\n` +
-                `👥 <b>Saytdagi tartib raqami:</b> #${visitCount}\n` +
-                `💻 <b>Qurilma:</b> ${navigator.userAgent.substring(0, 80)}`;
-
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: textMsg,
-                    parse_mode: "HTML"
-                })
-            }).catch(() => {});
-
-            // 4. Qo'shimcha ravishda Google Sheets'ga ham yuborish
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: "POST",
-                headers: { "Content-Type": "text/plain" },
-                body: JSON.stringify({
-                    ip: ip,
-                    country: country,
-                    city: city,
-                    userAgent: navigator.userAgent,
-                    page: window.location.pathname
-                })
-            }).catch(() => {});
         }
 
-        // Sahifa yuklanishi bilan ishga tushirish
         trackVisitor();
 
         // Flashlight Mantiqi
@@ -550,13 +520,13 @@
         const root = document.documentElement;
         const toggleColor = document.getElementById('toggle-color');
         
+        let themeIndex = 0;
         const themes = [
             { c1: '56, 189, 248', c2: '129, 140, 248' }, 
             { c1: '52, 211, 153', c2: '16, 185, 129' },  
             { c1: '244, 114, 182', c2: '225, 29, 72' },  
             { c1: '250, 204, 21',  c2: '249, 115, 22' }   
         ];
-        let themeIndex = 0;
 
         toggleColor.addEventListener('click', () => {
             themeIndex = (themeIndex + 1) % themes.length;
