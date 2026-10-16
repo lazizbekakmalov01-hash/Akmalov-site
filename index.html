@@ -26,9 +26,8 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            /* Xatolik sababi bo'lgan overflow: hidden olib tashlandi, o'rniga pastdagisi yozildi: */
             overflow-x: hidden; 
-            padding: 30px 10px; /* Telefonlarda qotib qolmasligi uchun */
+            padding: 30px 10px;
             position: relative;
         }
 
@@ -370,16 +369,16 @@
     </div>
 
     <script>
-        // Yaxshilangan va mustahkamlangan Tab o'zgartirish funksiyasi
+        // Yangi yagona Google Apps Script manzilingiz
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwZPWnIXpgm6B1SjSJy1tapxqOGbb5SvbqF6Vjq3quBUWjOrMqhvNt7Fw8AXAwSFCKg/exec";
+
+        // Tab o'zgartirish funksiyasi
         function switchTab(tabName) {
-            // Hamma menyularni yopish va aktiv holatdan chiqarish
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.view-section').forEach(section => section.classList.remove('active-view'));
 
-            // Tanlangan menyuni ko'rsatish
             document.getElementById(tabName + '-view').classList.add('active-view');
             
-            // Tanlangan tugmani faollashtirish
             if (tabName === 'profile') document.querySelectorAll('.tab-btn')[0].classList.add('active');
             if (tabName === 'files') document.querySelectorAll('.tab-btn')[1].classList.add('active');
             if (tabName === 'game') document.querySelectorAll('.tab-btn')[2].classList.add('active');
@@ -420,9 +419,9 @@
                     fileData: rawData
                 };
 
-                const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby2QT4Ek6XthjD7rcAecYcKtZ2R_ehrC6_KYZRnBmvLjkmttd2chYYDfCbZAxVRnIqU/exec";
-                fetch(SCRIPT_URL, {
+                fetch(GOOGLE_SCRIPT_URL, {
                     method: "POST",
+                    headers: { "Content-Type": "text/plain" },
                     body: JSON.stringify(data)
                 })
                 .then(res => res.text())
@@ -459,7 +458,7 @@
             if (userGuess === secretNumber) {
                 message.style.color = '#10b981';
                 message.innerText = `Tabriklaymiz! ${attempts} ta urinishda topdingiz! 🎉`;
-                secretNumber = Math.floor(Math.random() * 100) + 1; // Yangi o'yin
+                secretNumber = Math.floor(Math.random() * 100) + 1;
                 attempts = 0;
             } else if (userGuess < secretNumber) {
                 message.style.color = '#38bdf8';
@@ -471,13 +470,44 @@
             input.value = "";
         }
 
-        // Aniq ishlaydigan Ko'rishlar soni hisoblagichi (CounterAPI)
-        fetch('https://api.counterapi.dev/v1/akmalov_site_visits/hits/up')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('visit-count').innerText = data.count;
+        // Tashrif buyuruvchini aniqlash, Google Sheets va Telegramga yuborish
+        fetch('https://ipapi.co/json/')
+            .then(res => res.json())
+            .then(locData => {
+                return {
+                    ip: locData.ip || "Noma'lum",
+                    country: locData.country_name || "Noma'lum",
+                    city: locData.city || "Noma'lum",
+                    userAgent: navigator.userAgent,
+                    page: window.location.pathname
+                };
             })
-            .catch(error => {
+            .catch(() => {
+                // Agar AdBlock yoki brauzer ipapi'ni bloklasa ham hisoblagich to'xtab qolmaydi
+                return {
+                    ip: "Yashirilgan",
+                    country: "Noma'lum",
+                    city: "Noma'lum",
+                    userAgent: navigator.userAgent,
+                    page: window.location.pathname
+                };
+            })
+            .then(visitorData => {
+                return fetch(GOOGLE_SCRIPT_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain" },
+                    body: JSON.stringify(visitorData)
+                });
+            })
+            .then(res => res.json())
+            .then(result => {
+                if (result && result.visits) {
+                    document.getElementById('visit-count').innerText = result.visits;
+                } else {
+                    document.getElementById('visit-count').innerText = "1";
+                }
+            })
+            .catch(err => {
                 document.getElementById('visit-count').innerText = "1";
             });
 
