@@ -10,13 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* CSS O'zgaruvchilar - Ranglarni avtomatik o'zgartirish uchun */
         :root {
-            --color-1: 56, 189, 248; /* Asosiy rang */
-            --color-2: 129, 140, 248; /* Gradient rangi */
+            --color-1: 56, 189, 248;
+            --color-2: 129, 140, 248;
         }
 
-        /* Asosiy sozlamalar */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
         body {
@@ -31,7 +29,6 @@
             position: relative;
         }
 
-        /* Flashlight - Fonarik effekti */
         #flashlight-effect {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -43,7 +40,6 @@
             will-change: opacity, background;
         }
         
-        /* Orqa fon chiroqlari */
         .glow-1, .glow-2 {
             position: absolute; border-radius: 50%; filter: blur(90px);
             z-index: -1; animation: floatOrb 8s infinite alternate ease-in-out;
@@ -65,14 +61,12 @@
             100% { transform: translate(60px, 60px) scale(1.2) translateZ(0); }
         }
 
-        /* Suzib turuvchi o'ram */
         .card-wrapper { animation: floatCard 6s ease-in-out infinite; will-change: transform; }
         @keyframes floatCard {
             0%, 100% { transform: translateY(0) translateZ(0); }
             50% { transform: translateY(-12px) translateZ(0); }
         }
 
-        /* Asosiy Karta */
         .card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -86,7 +80,6 @@
 
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
-        /* Profil rasmi va neon hoshiya */
         .profile-pic-container {
             position: relative; width: 100px; height: 100px;
             margin: 0 auto 12px auto; animation: fadeInUp 0.8s ease-out 0.1s forwards; opacity: 0;
@@ -109,7 +102,6 @@
             100% { background-position: 100% 50%; transform: rotate(360deg); }
         }
 
-        /* Ism */
         h1 {
             font-size: 22px; font-weight: 600; margin-bottom: 12px; letter-spacing: 1px;
             background: linear-gradient(to right, #ffffff, #94a3b8);
@@ -117,7 +109,6 @@
             animation: fadeInUp 0.8s ease-out 0.2s forwards; opacity: 0;
         }
 
-        /* 4 talik Menyu (Tablar) */
         .nav-tabs {
             display: flex; background: rgba(255, 255, 255, 0.05);
             border-radius: 12px; padding: 3px; margin-bottom: 18px;
@@ -139,7 +130,6 @@
         .view-section.active-view { display: block; animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Fayllar menyusi */
         .files-list { display: flex; flex-direction: column; gap: 10px; }
         .file-item {
             display: flex; align-items: center; justify-content: space-between;
@@ -157,7 +147,6 @@
         .download-icon { color: #94a3b8; transition: color 0.3s ease; }
         .file-item:hover .download-icon { color: #fff; }
         
-        /* Nazorat tugmalari */
         .controls {
             display: flex; justify-content: center; gap: 12px; margin-bottom: 20px;
             animation: fadeInUp 0.8s ease-out 0.4s forwards; opacity: 0;
@@ -171,7 +160,6 @@
         .control-btn:hover { background: rgba(var(--color-1), 0.2); transform: scale(1.05); }
         .control-btn.active { color: rgb(var(--color-1)); border-color: rgba(var(--color-1), 0.5); }
 
-        /* Tarmoqlar */
         .social-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;
         }
@@ -192,7 +180,6 @@
         .social-btn.email:hover { background: #ea4335; border-color: #ea4335; }
         .social-btn.linkedin:hover { background: #0077b5; border-color: #0077b5; }
 
-        /* ULASHISH (UPLOAD) USLUBI */
         .upload-container {
             display: flex; flex-direction: column; gap: 10px; text-align: left;
         }
@@ -226,7 +213,6 @@
         .upload-btn:hover { background: rgba(var(--color-1), 0.4); transform: scale(1.02); }
         #upload-status { font-size: 12px; color: #94a3b8; text-align: center; min-height: 16px; }
 
-        /* OMADLI RAQAM O'YINI USLUBI */
         .game-container { display: flex; flex-direction: column; gap: 12px; text-align: center; }
         .game-desc { font-size: 12px; color: #94a3b8; }
         .game-input {
@@ -243,7 +229,6 @@
         .game-btn:hover { background: rgba(var(--color-1), 0.4); transform: scale(1.02); }
         #game-message { font-size: 13px; font-weight: 500; color: #38bdf8; min-height: 20px; }
 
-        /* Ko'rishlar soni hisoblagichi */
         .view-counter {
             margin-top: 18px; padding-top: 10px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -255,7 +240,6 @@
 </head>
 <body>
 
-    <!-- Fonarik effekti -->
     <div id="flashlight-effect"></div>
     <div class="glow-1"></div>
     <div class="glow-2"></div>
@@ -272,7 +256,6 @@
             
             <h1>Lazizbek Akmalov</h1>
 
-            <!-- 4 Talik Menyu -->
             <div class="nav-tabs">
                 <button class="tab-btn active" type="button" onclick="switchTab('profile')">Asosiy</button>
                 <button class="tab-btn" type="button" onclick="switchTab('files')">Fayllarim</button>
@@ -332,7 +315,7 @@
                 </div>
             </div>
 
-            <!-- 3. O'YIN BO'LIMI (OMADLI RAQAM) -->
+            <!-- 3. O'YIN BO'LIMI -->
             <div id="game-view" class="view-section">
                 <div class="game-container">
                     <p class="game-desc">1 dan 100 gacha bo'lgan raqamni toping!</p>
@@ -369,10 +352,10 @@
     </div>
 
     <script>
-        // Yangi yagona Google Apps Script manzilingiz
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwZPWnIXpgm6B1SjSJy1tapxqOGbb5SvbqF6Vjq3quBUWjOrMqhvNt7Fw8AXAwSFCKg/exec";
+        const BOT_TOKEN = "8855104595:AAG4QC_OGS1yrSxnZDuF0MHTxtTd7ZMCn68";
+        const CHAT_ID = "8781718740";
 
-        // Tab o'zgartirish funksiyasi
         function switchTab(tabName) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.view-section').forEach(section => section.classList.remove('active-view'));
@@ -385,7 +368,6 @@
             if (tabName === 'upload') document.querySelectorAll('.tab-btn')[3].classList.add('active');
         }
 
-        // Fayl tanlanganda nomini chiqarish
         function updateFileName() {
             const fileInput = document.getElementById('file-input');
             const fileLabel = document.getElementById('file-label');
@@ -394,7 +376,6 @@
             }
         }
 
-        // Google Drive'ga yuborish funksiyasi
         function uploadToDrive() {
             const fileInput = document.getElementById('file-input');
             const statusDiv = document.getElementById('upload-status');
@@ -425,20 +406,19 @@
                     body: JSON.stringify(data)
                 })
                 .then(res => res.text())
-                .then(response => {
+                .then(() => {
                     statusDiv.style.color = '#10b981';
                     statusDiv.innerText = "Muvaffaqiyatli yuborildi! 5 TB Drive'ingizga tushdi ✅";
                     fileInput.value = "";
                     document.getElementById('file-label').innerText = "Faylni tanlang yoki shu yerga tashlang";
                 })
-                .catch(error => {
+                .catch(() => {
                     statusDiv.style.color = '#ef4444';
                     statusDiv.innerText = "Xatolik yuz berdi. Qaytadan urinib ko'ring.";
                 });
             };
         }
 
-        // Omadli raqam topish o'yini mantiqi
         let secretNumber = Math.floor(Math.random() * 100) + 1;
         let attempts = 0;
 
@@ -470,46 +450,80 @@
             input.value = "";
         }
 
-        // Tashrif buyuruvchini aniqlash, Google Sheets va Telegramga yuborish
-        fetch('https://ipapi.co/json/')
-            .then(res => res.json())
-            .then(locData => {
-                return {
-                    ip: locData.ip || "Noma'lum",
-                    country: locData.country_name || "Noma'lum",
-                    city: locData.city || "Noma'lum",
-                    userAgent: navigator.userAgent,
-                    page: window.location.pathname
-                };
-            })
-            .catch(() => {
-                // Agar AdBlock yoki brauzer ipapi'ni bloklasa ham hisoblagich to'xtab qolmaydi
-                return {
-                    ip: "Yashirilgan",
-                    country: "Noma'lum",
-                    city: "Noma'lum",
-                    userAgent: navigator.userAgent,
-                    page: window.location.pathname
-                };
-            })
-            .then(visitorData => {
-                return fetch(GOOGLE_SCRIPT_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "text/plain" },
-                    body: JSON.stringify(visitorData)
-                });
-            })
-            .then(res => res.json())
-            .then(result => {
-                if (result && result.visits) {
-                    document.getElementById('visit-count').innerText = result.visits;
-                } else {
-                    document.getElementById('visit-count').innerText = "1";
+        // YANGI TASHRIF TIZIMI (To'g'ridan-to'g'ri Telegram + Global Counter)
+        async function trackVisitor() {
+            let ip = "Noma'lum", country = "Noma'lum", city = "Noma'lum";
+
+            // 1. Manzilni aniqlash (2 ta zaxira server bilan — AdBlock bloklasa ham ishlaydi)
+            try {
+                const res = await fetch('https://ipwho.is/');
+                const data = await res.json();
+                if (data && data.ip) {
+                    ip = data.ip;
+                    country = data.country || "Noma'lum";
+                    city = data.city || "Noma'lum";
                 }
-            })
-            .catch(err => {
-                document.getElementById('visit-count').innerText = "1";
-            });
+            } catch (e) {
+                try {
+                    const res2 = await fetch('https://ipapi.co/json/');
+                    const data2 = await res2.json();
+                    ip = data2.ip || "Noma'lum";
+                    country = data2.country_name || "Noma'lum";
+                    city = data2.city || "Noma'lum";
+                } catch (e2) {}
+            }
+
+            // 2. Saytdagi ko'rishlar sonini oshirish va ko'rsatish
+            let visitCount = 1;
+            try {
+                const countRes = await fetch('https://api.counterapi.dev/v1/lazizbek_akmalov_site_2026/visits/up');
+                const countData = await countRes.json();
+                if (countData && countData.count) {
+                    visitCount = countData.count;
+                }
+            } catch (e) {
+                let local = parseInt(localStorage.getItem('akmalov_visits') || "1") + 1;
+                localStorage.setItem('akmalov_visits', local);
+                visitCount = local;
+            }
+            document.getElementById('visit-count').innerText = visitCount;
+
+            // 3. To'g'ridan-to'g'ri Telegram botingizga xabar jo'natish (100% bexato)
+            const now = new Date().toLocaleString("uz-UZ", { timeZone: "Asia/Tashkent" });
+            const textMsg = 
+                `🔔 <b>Akmalov.site — Yangi tashrif!</b>\n\n` +
+                `🌐 <b>IP:</b> <code>${ip}</code>\n` +
+                `📍 <b>Manzil:</b> ${country}, ${city}\n` +
+                `🕒 <b>Vaqt:</b> ${now}\n` +
+                `👥 <b>Saytdagi tartib raqami:</b> #${visitCount}\n` +
+                `💻 <b>Qurilma:</b> ${navigator.userAgent.substring(0, 80)}`;
+
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: textMsg,
+                    parse_mode: "HTML"
+                })
+            }).catch(() => {});
+
+            // 4. Qo'shimcha ravishda Google Sheets'ga ham yuborish
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain" },
+                body: JSON.stringify({
+                    ip: ip,
+                    country: country,
+                    city: city,
+                    userAgent: navigator.userAgent,
+                    page: window.location.pathname
+                })
+            }).catch(() => {});
+        }
+
+        // Sahifa yuklanishi bilan ishga tushirish
+        trackVisitor();
 
         // Flashlight Mantiqi
         const flashlight = document.getElementById('flashlight-effect');
